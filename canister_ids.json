@@ -4,5 +4,9 @@
   },
   "icp_frontend": {
     "ic": "4s63n-5iaaa-aaaaj-az5tq-cai"
+  },
+  "icp_bqbtc": {
+    "local": "uxrrr-q7777-77774-qaaaq-cai",
+    "ic": "ryjl3-tyaaa-aaaaa-aaaba-cai"
   }
 }

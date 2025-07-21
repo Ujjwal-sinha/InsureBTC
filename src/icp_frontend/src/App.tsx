@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getBQBTCActor } from './utils/actor';
 import { Principal } from '@dfinity/principal';
-import './App.css'
+import './App.css';
 
 const App = () => {
   const [balance, setBalance] = useState<string>('0');
@@ -12,7 +12,6 @@ const App = () => {
   const [transferAddress, setTransferAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
-  const [currentPrincipal, setCurrentPrincipal] = useState('');
   const [currentOperation, setCurrentOperation] = useState<'check' | 'mint' | 'burn' | 'transfer' | null>(null);
 
   const defaultPrincipal = 'lwhp7-4f5ko-574g2-7fbvf-iba42-scc2h-34u62-ig5gr-ncqfi-exlgd-aqe';
@@ -42,11 +41,19 @@ const App = () => {
       // Convert bigint to string safely
       const balanceStr = typeof result === 'bigint' ? result.toString() : '0';
       setBalance(balanceStr);
-      setCurrentPrincipal(targetPrincipal);
+      setCheckAddress(targetPrincipal);
       setMessage(`Balance fetched successfully for ${targetPrincipal}`);
     } catch (error) {
       console.error('Error fetching balance:', error);
-      setMessage(`Error fetching balance: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      let errorMsg = 'Unknown error';
+      if (error instanceof Error) {
+        if (error.message.includes('Certificate verification error') || error.message.includes('Signature verification failed')) {
+          errorMsg = 'Network/canister certificate verification failed. This is often a local development issue. Try reloading the page or restarting your local dfx canister (run `dfx stop` then `dfx start`).';
+        } else {
+          errorMsg = error.message;
+        }
+      }
+      setMessage(`Error fetching balance: ${errorMsg}`);
       setBalance('0');
     } finally {
       setIsLoading(false);
@@ -185,7 +192,7 @@ const App = () => {
               </button>
               <button 
                 onClick={() => {
-                  setCheckAddress('');
+                  setCheckAddress(defaultPrincipal);
                   fetchBalance(defaultPrincipal);
                 }}
                 disabled={isLoading}
@@ -195,11 +202,9 @@ const App = () => {
               </button>
             </div>
             <div className="balance-display">
-              <h4>Current Balance:</h4>
+              <h4>Current Balance for:</h4>
+              <p className="principal-info">{checkAddress}</p>
               <p className="balance">{balance} BQBTC</p>
-              {currentPrincipal && (
-                <p className="principal-info">Principal: {currentPrincipal}</p>
-              )}
             </div>
           </div>
 
