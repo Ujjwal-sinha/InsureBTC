@@ -26,7 +26,10 @@
         "entrypoint": "src/icp_frontend/index.html"
       },
       "source": ["src/icp_frontend/dist"],
-      "type": "assets"
+      "type": "assets",
+      "build": [
+        "cd src/icp_frontend && npm ci && npm run build"
+      ]
     },
     "evm_rpc": {
       "candid": "src/evm_rpc.did",
