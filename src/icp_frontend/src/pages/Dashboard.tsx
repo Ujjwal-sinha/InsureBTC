@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getBQBTCActor, getGovernanceActor, getCoverActor, getPoolActor } from '../utils/actor';
+import { getBQBTCActor, } from '../utils/actor';
 
 interface TokenInfo {
   name: string;
@@ -31,15 +31,15 @@ const Dashboard: React.FC = () => {
       const totalSupply = await actor.total_supply();
 
       setTokenInfo({
-        name,
-        symbol,
+        name: name as string,
+        symbol: symbol as string,
         decimals: Number(decimals),
-        total_supply: totalSupply
+        total_supply: totalSupply as bigint
       });
 
       // For demo purposes, using a placeholder principal
       const balance = await actor.balance_of('2vxsx-fae');
-      setBqbtcBalance(balance.toString());
+      setBqbtcBalance((balance as bigint).toString());
     } catch (err) {
       console.error('Error fetching balance:', err);
       setError(`Error fetching balance: ${err}`);
