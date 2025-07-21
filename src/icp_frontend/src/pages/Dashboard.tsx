@@ -18,27 +18,28 @@ const Dashboard: React.FC = () => {
   const [transferTo, setTransferTo] = useState('');
   const [transferAmount, setTransferAmount] = useState('');
 
+  const [principalId, setPrincipalId] = useState('2vxsx-fae');
   const fetchBalance = async () => {
     try {
       setLoading(true);
       setError('');
       const actor = await getBQBTCActor();
 
-      // Get token info
+      // Get token info (as properties, not functions)
       const name = await actor.name();
       const symbol = await actor.symbol();
       const decimals = await actor.decimals();
       const totalSupply = await actor.total_supply();
 
       setTokenInfo({
-        name: name as string,
-        symbol: symbol as string,
-        decimals: Number(decimals),
-        total_supply: totalSupply as bigint
+        name: typeof name === 'string' ? name : '',
+        symbol: typeof symbol === 'string' ? symbol : '',
+        decimals: typeof decimals === 'bigint' ? Number(decimals) : Number(decimals),
+        total_supply: typeof totalSupply === 'bigint' ? totalSupply : BigInt(String(totalSupply))
       });
 
-      // For demo purposes, using a placeholder principal
-      const balance = await actor.balance_of('2vxsx-fae');
+      // Use entered principal for balance
+      const balance = await actor.balance_of(principalId);
       setBqbtcBalance((balance as bigint).toString());
     } catch (err) {
       console.error('Error fetching balance:', err);
@@ -122,10 +123,20 @@ const Dashboard: React.FC = () => {
           )}
 
           <div style={{ marginBottom: '20px' }}>
-            <h3>Balance: {bqbtcBalance} BQBTC</h3>
-            <button onClick={fetchBalance} disabled={loading}>
-              {loading ? 'Loading...' : 'Refresh Balance'}
+            <h3>Check Balance</h3>
+            <input
+              type="text"
+              placeholder="Principal ID"
+              value={principalId}
+              onChange={e => setPrincipalId(e.target.value)}
+              style={{ marginRight: '10px', padding: '5px', width: '220px' }}
+            />
+            <button onClick={fetchBalance} disabled={loading || !principalId}>
+              {loading ? 'Loading...' : 'Check Balance'}
             </button>
+            <div style={{ marginTop: '10px' }}>
+              <strong>Balance:</strong> {bqbtcBalance} BQBTC
+            </div>
           </div>
 
           <div style={{ marginBottom: '20px' }}>
