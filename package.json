@@ -5,14 +5,20 @@
   },
   "name": "icp",
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
-    "prebuild": "npm run prebuild --workspaces --if-present",
-    "pretest": "npm run prebuild --workspaces --if-present",
-    "start": "npm start --workspaces --if-present",
-    "test": "npm test --workspaces --if-present"
+    "deploy": "dfx deploy",
+    "deploy:local": "dfx deploy --network local",
+    "start": "dfx start --background",
+    "stop": "dfx stop",
+    "frontend": "cd src/icp_frontend && npm run dev -- --host 0.0.0.0 --port 5000",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
   "workspaces": [
     "src/icp_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@types/three": "^0.178.1",
+    "react-router-dom": "^7.7.0",
+    "three": "^0.178.0"
+  }
 }
