@@ -10,12 +10,20 @@ import { canisterId as cover_canister_id } from '../../../declarations/icp_cover
 import { canisterId as pool_canister_id } from '../../../declarations/icp_pool/index.js';
 
 // Determine if we're in local development
-const isDevelopment = process.env.NODE_ENV === 'development' || 
-                     process.env.DFX_NETWORK === 'local' ||
+const isDevelopment = import.meta.env.VITE_DFX_NETWORK === 'local' || 
+                     import.meta.env.NODE_ENV === 'development' ||
                      window.location.hostname === 'localhost' ||
                      window.location.hostname.includes('127.0.0.1');
 
-const host = isDevelopment ? 'http://127.0.0.1:4943' : 'https://ic0.app';
+const host = isDevelopment ? 
+  (import.meta.env.VITE_IC_HOST_LOCAL || 'http://127.0.0.1:4943') : 
+  (import.meta.env.VITE_IC_HOST_MAINNET || 'https://ic0.app');
+
+// Get canister IDs from environment or fallback to declarations
+const BQBTC_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_BQBTC || bqbtc_canister_id || "umunu-kh777-77774-qaaca-cai";
+const GOVERNANCE_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_GOVERNANCE || governance_canister_id || "ufxgi-4p777-77774-qaadq-cai";
+const COVER_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_COVER || cover_canister_id || "vizcg-th777-77774-qaaea-cai";
+const POOL_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_POOL || pool_canister_id || "ucwa4-rx777-77774-qaada-cai";
 
 // Create a shared agent
 let agent: HttpAgent | null = null;
@@ -42,7 +50,7 @@ export async function getBQBTCActor() {
   const agentInstance = await getAgent();
   return Actor.createActor(bqbtc_idl, {
     agent: agentInstance,
-    canisterId: bqbtc_canister_id,
+    canisterId: BQBTC_CANISTER_ID,
   });
 }
 
@@ -50,7 +58,7 @@ export async function getGovernanceActor() {
   const agentInstance = await getAgent();
   return Actor.createActor(governance_idl, {
     agent: agentInstance,
-    canisterId: governance_canister_id,
+    canisterId: GOVERNANCE_CANISTER_ID,
   });
 }
 
@@ -58,7 +66,7 @@ export async function getCoverActor() {
   const agentInstance = await getAgent();
   return Actor.createActor(cover_idl, {
     agent: agentInstance,
-    canisterId: cover_canister_id,
+    canisterId: COVER_CANISTER_ID,
   });
 }
 
@@ -66,6 +74,6 @@ export async function getPoolActor() {
   const agentInstance = await getAgent();
   return Actor.createActor(pool_idl, {
     agent: agentInstance,
-    canisterId: pool_canister_id,
+    canisterId: POOL_CANISTER_ID,
   });
 }

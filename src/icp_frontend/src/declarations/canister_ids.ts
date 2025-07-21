@@ -1,6 +1,7 @@
+
 export const CANISTER_IDS = {
-  icp_bqbtc: "uxrrr-q7777-77774-qaaaq-cai",
-  icp_cover: "bkyz2-fmaaa-aaaaa-qaaaq-cai",
-  icp_pool: "bkyz2-fmaaa-aaaaa-qaaaq-cai",
-  icp_governance: "bkyz2-fmaaa-aaaaa-qaaaq-cai"
+  icp_bqbtc: "umunu-kh777-77774-qaaca-cai",
+  icp_cover: "vizcg-th777-77774-qaaea-cai",
+  icp_pool: "ucwa4-rx777-77774-qaada-cai",
+  icp_governance: "ufxgi-4p777-77774-qaadq-cai"
 };
