@@ -1,0 +1,47 @@
+{
+  "canisters": {
+    "icp_bqbtc": {
+      "type": "rust",
+      "package": "bqbtc",
+      "candid": "src/icp_bqbtc/bqbtc.did"
+    },
+    "icp_governance": {
+      "type": "rust",
+      "package": "governance",
+      "candid": "src/icp_governance/governance.did"
+    },
+    "icp_cover": {
+      "type": "rust",
+      "package": "cover",
+      "candid": "src/icp_cover/cover.did"
+    },
+    "icp_pool": {
+      "type": "rust",
+      "package": "pool",
+      "candid": "src/icp_pool/pool.did"
+    },
+    "icp_frontend": {
+      "dependencies": ["icp_pool","icp_governance","icp_cover","icp_bqbtc"],
+      "source": ["src/icp_frontend/build"],
+      "type": "assets",
+      "candid": "src/icp_frontend/assetstorage.did"
+    },
+    "evm_rpc": {
+      "candid": "src/evm_rpc.did",
+      "declarations": {
+        "output": "src/evm_rpc/declarations"
+      },
+      "init_arg": "(record { nodesInSubnet = 28 })",
+      "remote": {
+        "candid": "src/evm_rpc.did",
+        "id": {
+          "ic": "7hfb6-caaaa-aaaar-qadga-cai"
+        }
+      },
+      "specified_id": "7hfb6-caaaa-aaaar-qadga-cai",
+      "type": "custom",
+      "wasm": "https://github.com/internet-computer-protocol/evm-rpc-canister/releases/latest/download/evm_rpc.wasm.gz"
+    }
+  },
+  "version": 1
+}
