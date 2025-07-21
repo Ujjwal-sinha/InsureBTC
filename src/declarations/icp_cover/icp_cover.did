@@ -28,7 +28,6 @@ type Result_2 = variant { Ok : vec principal; Err : text };
 type Result_3 = variant { Ok : vec GenericCoverInfo; Err : text };
 type Result_4 = variant { Ok : Cover; Err : text };
 type Result_5 = variant { Ok : nat; Err : text };
-type Result_6 = variant { Ok : GenericCoverInfo; Err : text };
 type RiskType = variant { Stablecoin; Slashing; SmartContract; Protocol };
 service : (principal, principal, principal, principal) -> {
   claimPayoutForLP : (nat) -> (Result);
@@ -37,13 +36,15 @@ service : (principal, principal, principal, principal) -> {
   getAllAvailableCovers : () -> (Result_1) query;
   getAllParticipants : () -> (Result_2) query;
   getAllUserCovers : (principal) -> (Result_3) query;
+  getCanisterIds : () -> (principal, principal, principal, principal) query;
   getCoverInfo : (nat) -> (Result_4) query;
   getDepositClaimableDays : (principal, nat) -> (Result_5) query;
   getLastClaimTime : (principal, nat) -> (Result_5) query;
-  getUserCoverInfo : (principal, nat) -> (Result_6) query;
+  getUserCoverInfo : (principal, nat) -> (opt GenericCoverInfo) query;
   getUserParticipation : (principal) -> (Result_5) query;
-  purchaseCover : (nat, nat, nat, nat) -> (Result);
+  purchaseCover : (nat, nat, nat, nat64) -> (Result);
+  updateCanisterIds : (principal, principal, principal) -> ();
   updateCover : (nat, text, RiskType, text, text, nat, nat, nat) -> (Result);
-  updateMaxAmount : (nat) -> (Result);
+  updateMaxAmount : (nat) -> ();
   updateUserCoverValue : (principal, nat, nat) -> (Result);
 }

@@ -53,15 +53,9 @@ export type Result = { 'Ok' : null } |
   { 'Err' : string };
 export type Result_1 = { 'Ok' : Array<Principal> } |
   { 'Err' : string };
-export type Result_2 = { 'Ok' : Pool } |
+export type Result_2 = { 'Ok' : bigint } |
   { 'Err' : string };
-export type Result_3 = { 'Ok' : Array<Cover> } |
-  { 'Err' : string };
-export type Result_4 = { 'Ok' : bigint } |
-  { 'Err' : string };
-export type Result_5 = { 'Ok' : Deposit } |
-  { 'Err' : string };
-export type Result_6 = { 'Ok' : boolean } |
+export type Result_3 = { 'Ok' : boolean } |
   { 'Err' : string };
 export type RiskType = { 'Stablecoin' : null } |
   { 'Slashing' : null } |
@@ -77,17 +71,26 @@ export interface _SERVICE {
   'deposit' : ActorMethod<[bigint, bigint], Result>,
   'getAllParticipants' : ActorMethod<[], Result_1>,
   'getAllPools' : ActorMethod<[], Array<[bigint, Pool]>>,
+  'getCanisterIds' : ActorMethod<
+    [],
+    [[] | [Principal], [] | [Principal], [] | [Principal]]
+  >,
   'getOwner' : ActorMethod<[], [] | [Principal]>,
-  'getPool' : ActorMethod<[bigint], Result_2>,
-  'getPoolCovers' : ActorMethod<[bigint], Result_3>,
-  'getPoolTVL' : ActorMethod<[bigint], Result_4>,
+  'getPool' : ActorMethod<[bigint], [] | [Pool]>,
+  'getPoolCovers' : ActorMethod<[bigint], Array<Cover>>,
+  'getPoolTVL' : ActorMethod<[bigint], Result_2>,
   'getPoolsByAddress' : ActorMethod<[Principal], Array<PoolInfo>>,
-  'getUserDeposit' : ActorMethod<[bigint, Principal], Result_5>,
-  'getUserParticipation' : ActorMethod<[Principal], Result_4>,
-  'increasePercentageSplit' : ActorMethod<[bigint, bigint], Result>,
-  'poolActive' : ActorMethod<[bigint], Result_6>,
-  'reducePercentageSplit' : ActorMethod<[bigint, bigint], Result>,
+  'getUserDeposit' : ActorMethod<[bigint, Principal], [] | [Deposit]>,
+  'getUserParticipation' : ActorMethod<[Principal], Result_2>,
+  'increasePercentageSplit' : ActorMethod<[bigint, bigint], undefined>,
+  'poolActive' : ActorMethod<[bigint], Result_3>,
+  'reducePercentageSplit' : ActorMethod<[bigint, bigint], undefined>,
+  'setCover' : ActorMethod<[Principal], Result>,
   'setOwner' : ActorMethod<[Principal], Result>,
+  'updateCanisterIds' : ActorMethod<
+    [Principal, Principal, Principal],
+    undefined
+  >,
   'updatePool' : ActorMethod<[bigint, bigint, bigint], Result>,
   'updatePoolCovers' : ActorMethod<[bigint, Cover], Result>,
   'withdraw' : ActorMethod<[bigint, bigint], Result>,

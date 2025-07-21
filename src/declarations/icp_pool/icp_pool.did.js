@@ -46,9 +46,7 @@ export const idlFactory = ({ IDL }) => {
     'deposits' : IDL.Vec(IDL.Tuple(IDL.Principal, Deposit)),
     'risk_type' : RiskType,
   });
-  const Result_2 = IDL.Variant({ 'Ok' : Pool, 'Err' : IDL.Text });
-  const Result_3 = IDL.Variant({ 'Ok' : IDL.Vec(Cover), 'Err' : IDL.Text });
-  const Result_4 = IDL.Variant({ 'Ok' : IDL.Nat, 'Err' : IDL.Text });
+  const Result_2 = IDL.Variant({ 'Ok' : IDL.Nat, 'Err' : IDL.Text });
   const PoolInfo = IDL.Record({
     'apy' : IDL.Nat,
     'tcp' : IDL.Nat,
@@ -61,8 +59,7 @@ export const idlFactory = ({ IDL }) => {
     'pool_id' : IDL.Nat,
     'daily_payout' : IDL.Nat,
   });
-  const Result_5 = IDL.Variant({ 'Ok' : Deposit, 'Err' : IDL.Text });
-  const Result_6 = IDL.Variant({ 'Ok' : IDL.Bool, 'Err' : IDL.Text });
+  const Result_3 = IDL.Variant({ 'Ok' : IDL.Bool, 'Err' : IDL.Text });
   return IDL.Service({
     'addPoolCover' : IDL.Func([IDL.Nat, Cover], [Result], []),
     'claimProposalFunds' : IDL.Func([IDL.Nat], [Result], []),
@@ -72,17 +69,26 @@ export const idlFactory = ({ IDL }) => {
         [],
       ),
     'deactivatePool' : IDL.Func([IDL.Nat], [Result], []),
-    'deposit' : IDL.Func([IDL.Nat, IDL.Nat], [Result], []),
+    'deposit' : IDL.Func([IDL.Nat, IDL.Nat64], [Result], []),
     'getAllParticipants' : IDL.Func([], [Result_1], ['query']),
     'getAllPools' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(IDL.Nat, Pool))],
         ['query'],
       ),
+    'getCanisterIds' : IDL.Func(
+        [],
+        [
+          IDL.Opt(IDL.Principal),
+          IDL.Opt(IDL.Principal),
+          IDL.Opt(IDL.Principal),
+        ],
+        ['query'],
+      ),
     'getOwner' : IDL.Func([], [IDL.Opt(IDL.Principal)], ['query']),
-    'getPool' : IDL.Func([IDL.Nat], [Result_2], ['query']),
-    'getPoolCovers' : IDL.Func([IDL.Nat], [Result_3], ['query']),
-    'getPoolTVL' : IDL.Func([IDL.Nat], [Result_4], ['query']),
+    'getPool' : IDL.Func([IDL.Nat], [IDL.Opt(Pool)], ['query']),
+    'getPoolCovers' : IDL.Func([IDL.Nat], [IDL.Vec(Cover)], []),
+    'getPoolTVL' : IDL.Func([IDL.Nat], [Result_2], ['query']),
     'getPoolsByAddress' : IDL.Func(
         [IDL.Principal],
         [IDL.Vec(PoolInfo)],
@@ -90,14 +96,20 @@ export const idlFactory = ({ IDL }) => {
       ),
     'getUserDeposit' : IDL.Func(
         [IDL.Nat, IDL.Principal],
-        [Result_5],
+        [IDL.Opt(Deposit)],
         ['query'],
       ),
-    'getUserParticipation' : IDL.Func([IDL.Principal], [Result_4], ['query']),
-    'increasePercentageSplit' : IDL.Func([IDL.Nat, IDL.Nat], [Result], []),
-    'poolActive' : IDL.Func([IDL.Nat], [Result_6], ['query']),
-    'reducePercentageSplit' : IDL.Func([IDL.Nat, IDL.Nat], [Result], []),
+    'getUserParticipation' : IDL.Func([IDL.Principal], [Result_2], ['query']),
+    'increasePercentageSplit' : IDL.Func([IDL.Nat, IDL.Nat], [], []),
+    'poolActive' : IDL.Func([IDL.Nat], [Result_3], ['query']),
+    'reducePercentageSplit' : IDL.Func([IDL.Nat, IDL.Nat], [], []),
+    'setCover' : IDL.Func([IDL.Principal], [Result], []),
     'setOwner' : IDL.Func([IDL.Principal], [Result], []),
+    'updateCanisterIds' : IDL.Func(
+        [IDL.Principal, IDL.Principal, IDL.Principal],
+        [],
+        [],
+      ),
     'updatePool' : IDL.Func([IDL.Nat, IDL.Nat, IDL.Nat], [Result], []),
     'updatePoolCovers' : IDL.Func([IDL.Nat, Cover], [Result], []),
     'withdraw' : IDL.Func([IDL.Nat, IDL.Nat], [Result], []),

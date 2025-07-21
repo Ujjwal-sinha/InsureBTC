@@ -21,10 +21,12 @@
       "candid": "src/icp_pool/pool.did"
     },
     "icp_frontend": {
-      "dependencies": ["icp_pool","icp_governance","icp_cover","icp_bqbtc"],
-      "source": ["src/icp_frontend/build"],
-      "type": "assets",
-      "candid": "src/icp_frontend/assetstorage.did"
+      "dependencies": ["icp_bqbtc"],
+      "frontend": {
+        "entrypoint": "src/icp_frontend/index.html"
+      },
+      "source": ["src/icp_frontend/dist"],
+      "type": "assets"
     },
     "evm_rpc": {
       "candid": "src/evm_rpc.did",

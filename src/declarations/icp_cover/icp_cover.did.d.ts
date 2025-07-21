@@ -38,8 +38,6 @@ export type Result_4 = { 'Ok' : Cover } |
   { 'Err' : string };
 export type Result_5 = { 'Ok' : bigint } |
   { 'Err' : string };
-export type Result_6 = { 'Ok' : GenericCoverInfo } |
-  { 'Err' : string };
 export type RiskType = { 'Stablecoin' : null } |
   { 'Slashing' : null } |
   { 'SmartContract' : null } |
@@ -54,17 +52,28 @@ export interface _SERVICE {
   'getAllAvailableCovers' : ActorMethod<[], Result_1>,
   'getAllParticipants' : ActorMethod<[], Result_2>,
   'getAllUserCovers' : ActorMethod<[Principal], Result_3>,
+  'getCanisterIds' : ActorMethod<
+    [],
+    [Principal, Principal, Principal, Principal]
+  >,
   'getCoverInfo' : ActorMethod<[bigint], Result_4>,
   'getDepositClaimableDays' : ActorMethod<[Principal, bigint], Result_5>,
   'getLastClaimTime' : ActorMethod<[Principal, bigint], Result_5>,
-  'getUserCoverInfo' : ActorMethod<[Principal, bigint], Result_6>,
+  'getUserCoverInfo' : ActorMethod<
+    [Principal, bigint],
+    [] | [GenericCoverInfo]
+  >,
   'getUserParticipation' : ActorMethod<[Principal], Result_5>,
   'purchaseCover' : ActorMethod<[bigint, bigint, bigint, bigint], Result>,
+  'updateCanisterIds' : ActorMethod<
+    [Principal, Principal, Principal],
+    undefined
+  >,
   'updateCover' : ActorMethod<
     [bigint, string, RiskType, string, string, bigint, bigint, bigint],
     Result
   >,
-  'updateMaxAmount' : ActorMethod<[bigint], Result>,
+  'updateMaxAmount' : ActorMethod<[bigint], undefined>,
   'updateUserCoverValue' : ActorMethod<[Principal, bigint, bigint], Result>,
 }
 export declare const idlFactory: IDL.InterfaceFactory;

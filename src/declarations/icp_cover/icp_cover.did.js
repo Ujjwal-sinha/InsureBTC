@@ -41,7 +41,6 @@ export const idlFactory = ({ IDL }) => {
   });
   const Result_4 = IDL.Variant({ 'Ok' : Cover, 'Err' : IDL.Text });
   const Result_5 = IDL.Variant({ 'Ok' : IDL.Nat, 'Err' : IDL.Text });
-  const Result_6 = IDL.Variant({ 'Ok' : GenericCoverInfo, 'Err' : IDL.Text });
   return IDL.Service({
     'claimPayoutForLP' : IDL.Func([IDL.Nat], [Result], []),
     'createCover' : IDL.Func(
@@ -62,6 +61,11 @@ export const idlFactory = ({ IDL }) => {
     'getAllAvailableCovers' : IDL.Func([], [Result_1], ['query']),
     'getAllParticipants' : IDL.Func([], [Result_2], ['query']),
     'getAllUserCovers' : IDL.Func([IDL.Principal], [Result_3], ['query']),
+    'getCanisterIds' : IDL.Func(
+        [],
+        [IDL.Principal, IDL.Principal, IDL.Principal, IDL.Principal],
+        ['query'],
+      ),
     'getCoverInfo' : IDL.Func([IDL.Nat], [Result_4], ['query']),
     'getDepositClaimableDays' : IDL.Func(
         [IDL.Principal, IDL.Nat],
@@ -75,13 +79,18 @@ export const idlFactory = ({ IDL }) => {
       ),
     'getUserCoverInfo' : IDL.Func(
         [IDL.Principal, IDL.Nat],
-        [Result_6],
+        [IDL.Opt(GenericCoverInfo)],
         ['query'],
       ),
     'getUserParticipation' : IDL.Func([IDL.Principal], [Result_5], ['query']),
     'purchaseCover' : IDL.Func(
-        [IDL.Nat, IDL.Nat, IDL.Nat, IDL.Nat],
+        [IDL.Nat, IDL.Nat, IDL.Nat, IDL.Nat64],
         [Result],
+        [],
+      ),
+    'updateCanisterIds' : IDL.Func(
+        [IDL.Principal, IDL.Principal, IDL.Principal],
+        [],
         [],
       ),
     'updateCover' : IDL.Func(
@@ -98,7 +107,7 @@ export const idlFactory = ({ IDL }) => {
         [Result],
         [],
       ),
-    'updateMaxAmount' : IDL.Func([IDL.Nat], [Result], []),
+    'updateMaxAmount' : IDL.Func([IDL.Nat], [], []),
     'updateUserCoverValue' : IDL.Func(
         [IDL.Principal, IDL.Nat, IDL.Nat],
         [Result],

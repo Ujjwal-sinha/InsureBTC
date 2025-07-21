@@ -37,8 +37,6 @@ export type Result_2 = { 'Ok' : Array<Principal> } |
   { 'Err' : string };
 export type Result_3 = { 'Ok' : bigint } |
   { 'Err' : string };
-export type Result_4 = { 'Ok' : Proposal } |
-  { 'Err' : string };
 export type RiskType = { 'Stablecoin' : null } |
   { 'Slashing' : null } |
   { 'SmartContract' : null } |
@@ -50,12 +48,17 @@ export interface _SERVICE {
   'getActiveProposals' : ActorMethod<[], Result_1>,
   'getAllParticipants' : ActorMethod<[], Result_2>,
   'getAllProposals' : ActorMethod<[], Result_1>,
+  'getCanisterIds' : ActorMethod<[], [Principal, Principal, Principal]>,
   'getPastProposals' : ActorMethod<[], Result_1>,
   'getProposalCount' : ActorMethod<[], Result_3>,
-  'getProposalDetails' : ActorMethod<[bigint], Result_4>,
+  'getProposalDetails' : ActorMethod<[bigint], [] | [Proposal]>,
   'getUserParticipation' : ActorMethod<[Principal], Result_3>,
   'setVotingDuration' : ActorMethod<[bigint], Result>,
-  'updateProposalStatusToClaimed' : ActorMethod<[bigint], Result>,
+  'updateCanisterIds' : ActorMethod<
+    [Principal, Principal, Principal],
+    undefined
+  >,
+  'updateProposalStatusToClaimed' : ActorMethod<[bigint], undefined>,
   'updateRewardAmount' : ActorMethod<[bigint], Result>,
   'vote' : ActorMethod<[bigint, boolean], Result>,
 }

@@ -41,7 +41,6 @@ export const idlFactory = ({ IDL }) => {
     'Err' : IDL.Text,
   });
   const Result_3 = IDL.Variant({ 'Ok' : IDL.Nat, 'Err' : IDL.Text });
-  const Result_4 = IDL.Variant({ 'Ok' : Proposal, 'Err' : IDL.Text });
   return IDL.Service({
     'addAdmin' : IDL.Func([IDL.Principal], [Result], []),
     'createProposal' : IDL.Func([ProposalParam], [Result], []),
@@ -49,12 +48,22 @@ export const idlFactory = ({ IDL }) => {
     'getActiveProposals' : IDL.Func([], [Result_1], ['query']),
     'getAllParticipants' : IDL.Func([], [Result_2], ['query']),
     'getAllProposals' : IDL.Func([], [Result_1], ['query']),
+    'getCanisterIds' : IDL.Func(
+        [],
+        [IDL.Principal, IDL.Principal, IDL.Principal],
+        ['query'],
+      ),
     'getPastProposals' : IDL.Func([], [Result_1], ['query']),
     'getProposalCount' : IDL.Func([], [Result_3], ['query']),
-    'getProposalDetails' : IDL.Func([IDL.Nat], [Result_4], ['query']),
+    'getProposalDetails' : IDL.Func([IDL.Nat], [IDL.Opt(Proposal)], ['query']),
     'getUserParticipation' : IDL.Func([IDL.Principal], [Result_3], ['query']),
     'setVotingDuration' : IDL.Func([IDL.Nat64], [Result], []),
-    'updateProposalStatusToClaimed' : IDL.Func([IDL.Nat], [Result], []),
+    'updateCanisterIds' : IDL.Func(
+        [IDL.Principal, IDL.Principal, IDL.Principal],
+        [],
+        [],
+      ),
+    'updateProposalStatusToClaimed' : IDL.Func([IDL.Nat], [], []),
     'updateRewardAmount' : IDL.Func([IDL.Nat], [Result], []),
     'vote' : IDL.Func([IDL.Nat, IDL.Bool], [Result], []),
   });

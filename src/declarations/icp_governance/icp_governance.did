@@ -31,7 +31,6 @@ type Result = variant { Ok; Err : text };
 type Result_1 = variant { Ok : vec Proposal; Err : text };
 type Result_2 = variant { Ok : vec principal; Err : text };
 type Result_3 = variant { Ok : nat; Err : text };
-type Result_4 = variant { Ok : Proposal; Err : text };
 type RiskType = variant { Stablecoin; Slashing; SmartContract; Protocol };
 service : (principal, principal, principal, nat64) -> {
   addAdmin : (principal) -> (Result);
@@ -40,12 +39,14 @@ service : (principal, principal, principal, nat64) -> {
   getActiveProposals : () -> (Result_1) query;
   getAllParticipants : () -> (Result_2) query;
   getAllProposals : () -> (Result_1) query;
+  getCanisterIds : () -> (principal, principal, principal) query;
   getPastProposals : () -> (Result_1) query;
   getProposalCount : () -> (Result_3) query;
-  getProposalDetails : (nat) -> (Result_4) query;
+  getProposalDetails : (nat) -> (opt Proposal) query;
   getUserParticipation : (principal) -> (Result_3) query;
   setVotingDuration : (nat64) -> (Result);
-  updateProposalStatusToClaimed : (nat) -> (Result);
+  updateCanisterIds : (principal, principal, principal) -> ();
+  updateProposalStatusToClaimed : (nat) -> ();
   updateRewardAmount : (nat) -> (Result);
   vote : (nat, bool) -> (Result);
 }
