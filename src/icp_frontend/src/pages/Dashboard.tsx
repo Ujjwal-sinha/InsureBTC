@@ -34,18 +34,26 @@ const Dashboard: React.FC = () => {
         throw new Error('Invalid Principal ID format');
       }
 
-      // Fetch token info
-      const name = await actor.name();
-      const symbol = await actor.symbol();
-      const decimals = await actor.decimals();
-      const totalSupply = await actor.total_supply();
+      // Fetch token info as properties
+      const name = actor.name;
+      const symbol = actor.symbol;
+      const decimals = actor.decimals;
+      const totalSupply = actor.total_supply;
 
-      setTokenInfo({
-        name: typeof name === 'string' ? name : '',
-        symbol: typeof symbol === 'string' ? symbol : '',
-        decimals: typeof decimals === 'bigint' ? Number(decimals) : Number(decimals),
-        total_supply: BigInt(totalSupply as bigint),
-      });
+      // Convert and validate token info
+      const tokenData = {
+        name: String(name || ''),
+        symbol: String(symbol || ''),
+        decimals: typeof decimals === 'bigint' ? Number(decimals) : 
+                 typeof decimals === 'number' ? decimals : 
+                 Number(decimals || 0),
+        total_supply: typeof totalSupply === 'bigint' ? totalSupply :
+                     typeof totalSupply === 'string' ? BigInt(totalSupply) :
+                     typeof totalSupply === 'number' ? BigInt(totalSupply) :
+                     BigInt(0)
+      };
+
+      setTokenInfo(tokenData);
 
       // Fetch balance
       const balance = await actor.balance_of(principal);
@@ -146,7 +154,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     fetchBalance();
-  }, [principalId]); // Re-fetch balance when principalId changes
+  }, [principalId]);
 
   // Validate principal ID for UI feedback
   const isValidPrincipal = () => {
