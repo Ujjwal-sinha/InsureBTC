@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getBQBTCActor, } from '../utils/actor';
+import { Principal } from '@dfinity/principal';
+import { getBQBTCActor } from '../utils/actor';
 
 interface TokenInfo {
   name: string;
@@ -17,15 +18,23 @@ const Dashboard: React.FC = () => {
   const [burnAmount, setBurnAmount] = useState('');
   const [transferTo, setTransferTo] = useState('');
   const [transferAmount, setTransferAmount] = useState('');
-
   const [principalId, setPrincipalId] = useState('2vxsx-fae');
+
   const fetchBalance = async () => {
     try {
       setLoading(true);
       setError('');
       const actor = await getBQBTCActor();
 
-      // Get token info (as properties, not functions)
+      // Validate principal ID
+      let principal;
+      try {
+        principal = Principal.fromText(principalId);
+      } catch (err) {
+        throw new Error('Invalid Principal ID format');
+      }
+
+      // Fetch token info
       const name = await actor.name();
       const symbol = await actor.symbol();
       const decimals = await actor.decimals();
@@ -35,63 +44,101 @@ const Dashboard: React.FC = () => {
         name: typeof name === 'string' ? name : '',
         symbol: typeof symbol === 'string' ? symbol : '',
         decimals: typeof decimals === 'bigint' ? Number(decimals) : Number(decimals),
-        total_supply: typeof totalSupply === 'bigint' ? totalSupply : BigInt(String(totalSupply))
+        total_supply: BigInt(totalSupply as bigint),
       });
 
-      // Use entered principal for balance
-      const balance = await actor.balance_of(principalId);
-      setBqbtcBalance((balance as bigint).toString());
+      // Fetch balance
+      const balance = await actor.balance_of(principal);
+      if (balance === undefined || balance === null) {
+        throw new Error('Balance returned undefined or null');
+      }
+      setBqbtcBalance(balance.toString());
     } catch (err) {
       console.error('Error fetching balance:', err);
-      setError(`Error fetching balance: ${err}`);
+      setError(`Error fetching balance: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
   };
 
   const handleMint = async () => {
-    if (!mintAmount) return;
+    if (!mintAmount) {
+      setError('Please enter a valid mint amount');
+      return;
+    }
+    const amount = Number(mintAmount);
+    if (isNaN(amount) || amount <= 0) {
+      setError('Invalid mint amount');
+      return;
+    }
     try {
       setLoading(true);
       setError('');
       const actor = await getBQBTCActor();
-      await actor.mint('2vxsx-fae', BigInt(mintAmount));
+      const principal = Principal.fromText('2vxsx-fae'); // Replace with authenticated principal if needed
+      await actor.mint(principal, BigInt(amount));
       await fetchBalance();
+      setMintAmount('');
     } catch (err) {
       console.error('Error minting:', err);
-      setError(`Error minting: ${err}`);
+      setError(`Error fetching balance: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
   };
 
   const handleBurn = async () => {
-    if (!burnAmount) return;
+    if (!burnAmount) {
+      setError('Please enter a valid burn amount');
+      return;
+    }
+    const amount = Number(burnAmount);
+    if (isNaN(amount) || amount <= 0) {
+      setError('Invalid burn amount');
+      return;
+    }
     try {
       setLoading(true);
       setError('');
       const actor = await getBQBTCActor();
-      await actor.burn(BigInt(burnAmount));
+      await actor.burn(BigInt(amount));
       await fetchBalance();
+      setBurnAmount('');
     } catch (err) {
       console.error('Error burning:', err);
-      setError(`Error burning: ${err}`);
+      setError(`Error fetching balance: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
   };
 
   const handleTransfer = async () => {
-    if (!transferTo || !transferAmount) return;
+    if (!transferTo || !transferAmount) {
+      setError('Please enter recipient principal and amount');
+      return;
+    }
+    const amount = Number(transferAmount);
+    if (isNaN(amount) || amount <= 0) {
+      setError('Invalid transfer amount');
+      return;
+    }
     try {
       setLoading(true);
       setError('');
       const actor = await getBQBTCActor();
-      await actor.transfer(transferTo, BigInt(transferAmount));
+      let recipient;
+      try {
+        recipient = Principal.fromText(transferTo);
+      } catch (err) {
+        throw new Error('Invalid recipient Principal ID');
+      }
+      await actor.transfer(recipient, BigInt(amount));
       await fetchBalance();
+      setTransferTo('');
+      setTransferAmount('');
     } catch (err) {
       console.error('Error transferring:', err);
-      setError(`Error transferring: ${err}`);
+      setError(`Error fetching balance: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
@@ -99,7 +146,17 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     fetchBalance();
-  }, []);
+  }, [principalId]); // Re-fetch balance when principalId changes
+
+  // Validate principal ID for UI feedback
+  const isValidPrincipal = () => {
+    try {
+      Principal.fromText(principalId);
+      return true;
+    } catch {
+      return false;
+    }
+  };
 
   return (
     <div className="dashboard-page">
@@ -128,12 +185,15 @@ const Dashboard: React.FC = () => {
               type="text"
               placeholder="Principal ID"
               value={principalId}
-              onChange={e => setPrincipalId(e.target.value)}
+              onChange={(e) => setPrincipalId(e.target.value)}
               style={{ marginRight: '10px', padding: '5px', width: '220px' }}
             />
-            <button onClick={fetchBalance} disabled={loading || !principalId}>
+            <button onClick={fetchBalance} disabled={loading || !principalId || !isValidPrincipal()}>
               {loading ? 'Loading...' : 'Check Balance'}
             </button>
+            {!isValidPrincipal() && principalId && (
+              <p style={{ color: 'red', fontSize: '12px' }}>Invalid Principal ID</p>
+            )}
             <div style={{ marginTop: '10px' }}>
               <strong>Balance:</strong> {bqbtcBalance} BQBTC
             </div>
@@ -183,9 +243,20 @@ const Dashboard: React.FC = () => {
               onChange={(e) => setTransferAmount(e.target.value)}
               style={{ marginRight: '10px', padding: '5px' }}
             />
-            <button onClick={handleTransfer} disabled={loading || !transferTo || !transferAmount}>
+            <button
+              onClick={handleTransfer}
+              disabled={loading || !transferTo || !transferAmount}
+            >
               Transfer
             </button>
+            {transferTo && (() => {
+              try {
+                Principal.fromText(transferTo);
+                return null;
+              } catch {
+                return <p style={{ color: 'red', fontSize: '12px' }}>Invalid Recipient Principal</p>;
+              }
+            })()}
           </div>
         </div>
 
@@ -218,13 +289,15 @@ const Dashboard: React.FC = () => {
       </div>
 
       {error && (
-        <div style={{ 
-          color: 'red', 
-          marginTop: '20px', 
-          padding: '10px', 
-          background: 'rgba(255,0,0,0.1)', 
-          borderRadius: '5px' 
-        }}>
+        <div
+          style={{
+            color: 'red',
+            marginTop: '20px',
+            padding: '10px',
+            background: 'rgba(255,0,0,0.1)',
+            borderRadius: '5px',
+          }}
+        >
           {error}
         </div>
       )}
