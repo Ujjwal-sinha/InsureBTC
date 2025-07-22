@@ -51,7 +51,7 @@ type Result_2 = variant { Ok : nat; Err : text };
 type Result_3 = variant { Ok : bool; Err : text };
 type RiskType = variant { Stablecoin; Slashing; SmartContract; Protocol };
 type Status = variant { Active; Withdrawn };
-service : {
+service : (principal, principal) -> {
   addPoolCover : (nat, Cover) -> (Result);
   claimProposalFunds : (nat) -> (Result);
   createPool : (RiskType, text, nat, nat) -> (Result);

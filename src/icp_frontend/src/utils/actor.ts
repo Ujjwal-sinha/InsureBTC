@@ -4,10 +4,6 @@ import { idlFactory as bqbtc_idl } from '../../../declarations/icp_bqbtc/icp_bqb
 import { idlFactory as governance_idl } from '../../../declarations/icp_governance/icp_governance.did.js';
 import { idlFactory as cover_idl } from '../../../declarations/icp_cover/icp_cover.did.js';
 import { idlFactory as pool_idl } from '../../../declarations/icp_pool/icp_pool.did.js';
-import { canisterId as bqbtc_canister_id } from '../../../declarations/icp_bqbtc/index.js';
-import { canisterId as governance_canister_id } from '../../../declarations/icp_governance/index.js';
-import { canisterId as cover_canister_id } from '../../../declarations/icp_cover/index.js';
-import { canisterId as pool_canister_id } from '../../../declarations/icp_pool/index.js';
 
 // Determine if we're in local development
 const isDevelopment = import.meta.env.VITE_DFX_NETWORK === 'local' || 
@@ -19,17 +15,20 @@ const host = isDevelopment ?
   (import.meta.env.VITE_IC_HOST_LOCAL || 'http://127.0.0.1:4943') : 
   (import.meta.env.VITE_IC_HOST_MAINNET || 'https://ic0.app');
 
-// Get canister IDs from environment or fallback to declarations
-const BQBTC_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_BQBTC || bqbtc_canister_id || "umunu-kh777-77774-qaaca-cai";
-const GOVERNANCE_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_GOVERNANCE || governance_canister_id || "ufxgi-4p777-77774-qaadq-cai";
-const COVER_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_COVER || cover_canister_id || "vizcg-th777-77774-qaaea-cai";
-const POOL_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_POOL || pool_canister_id || "ucwa4-rx777-77774-qaada-cai";
-
+// Get canister IDs from environment or config based on network
+// Load canister IDs from environment variables first, then use defaults
+const BQBTC_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_BQBTC || "uxrrr-q7777-77774-qaaaq-cai";
+const GOVERNANCE_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_GOVERNANCE || "umunu-kh777-77774-qaaca-cai";
+const COVER_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_COVER || "u6s2n-gx777-77774-qaaba-cai";
+const POOL_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_POOL || "ulvla-h7777-77774-qaacq-cai";
 // Create a shared agent
 let agent: HttpAgent | null = null;
 
 async function getAgent() {
   if (!agent) {
+    console.log('Initializing HTTP agent with host:', host);
+    console.log('Environment:', isDevelopment ? 'Development' : 'Production');
+    
     agent = new HttpAgent({ host });
     
     // For local development, fetch root key to disable certificate verification
@@ -38,8 +37,12 @@ async function getAgent() {
         await agent.fetchRootKey();
         console.log('Root key fetched successfully for local development');
       } catch (error) {
-        console.warn('Unable to fetch root key. Ensure your local dfx replica is running on port 4943');
-        console.error(error);
+        console.error('Failed to fetch root key:', error);
+        console.warn('Please ensure:');
+        console.warn('1. Your local dfx replica is running (dfx start)');
+        console.warn('2. The correct port is being used (default: 4943)');
+        console.warn('3. The network configuration matches your environment');
+        throw new Error('Failed to initialize agent: Root key fetch failed');
       }
     }
   }
@@ -47,11 +50,24 @@ async function getAgent() {
 }
 
 export async function getBQBTCActor() {
-  const agentInstance = await getAgent();
-  return Actor.createActor(bqbtc_idl, {
-    agent: agentInstance,
-    canisterId: BQBTC_CANISTER_ID,
-  });
+  try {
+    const agentInstance = await getAgent();
+    console.log('Creating BQBTC actor with canister ID:', BQBTC_CANISTER_ID);
+    const actor = Actor.createActor(bqbtc_idl, {
+      agent: agentInstance,
+      canisterId: BQBTC_CANISTER_ID,
+    });
+    
+    // Verify actor creation
+    if (!actor) {
+      throw new Error('Failed to create BQBTC actor');
+    }
+    
+    return actor;
+  } catch (error) {
+    console.error('Error creating BQBTC actor:', error);
+    throw new Error(`Failed to initialize BQBTC actor: ${error instanceof Error ? error.message : String(error)}`);
+  }
 }
 
 export async function getGovernanceActor() {

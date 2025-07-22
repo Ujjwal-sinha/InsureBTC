@@ -2,6 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Principal } from '@dfinity/principal';
 import { getBQBTCActor } from '../utils/actor';
 
+interface TokenMetadata {
+  decimals: number;
+  owner: string;
+  logo: string;
+  name: string;
+  cover_address: string | null;
+  pool_address: string | null;
+  total_supply: bigint;
+  symbol: string;
+}
+
 interface TokenInfo {
   name: string;
   symbol: string;
@@ -34,26 +45,15 @@ const Dashboard: React.FC = () => {
         throw new Error('Invalid Principal ID format');
       }
 
-      // Fetch token info as properties
-      const name = actor.name;
-      const symbol = actor.symbol;
-      const decimals = actor.decimals;
-      const totalSupply = actor.total_supply;
-
-      // Convert and validate token info
-      const tokenData = {
-        name: String(name || ''),
-        symbol: String(symbol || ''),
-        decimals: typeof decimals === 'bigint' ? Number(decimals) : 
-                 typeof decimals === 'number' ? decimals : 
-                 Number(decimals || 0),
-        total_supply: typeof totalSupply === 'bigint' ? totalSupply :
-                     typeof totalSupply === 'string' ? BigInt(totalSupply) :
-                     typeof totalSupply === 'number' ? BigInt(totalSupply) :
-                     BigInt(0)
-      };
-
-      setTokenInfo(tokenData);
+      // Fetch token metadata
+      const metadata = await actor.get_metadata() as TokenMetadata;
+      
+      setTokenInfo({
+        name: metadata.name,
+        symbol: metadata.symbol,
+        decimals: Number(metadata.decimals),
+        total_supply: metadata.total_supply,
+      });
 
       // Fetch balance
       const balance = await actor.balance_of(principal);

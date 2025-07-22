@@ -1,23 +1,20 @@
 {
   "__Candid_UI": {
-    "local": "ucwa4-rx777-77774-qaada-cai"
-  },
-  "evm_rpc": {
-    "local": "7hfb6-caaaa-aaaar-qadga-cai"
+    "local": "u6s2n-gx777-77774-qaaba-cai"
   },
   "icp_bqbtc": {
     "local": "uxrrr-q7777-77774-qaaaq-cai"
   },
   "icp_cover": {
-    "local": "u6s2n-gx777-77774-qaaba-cai"
+    "local": "ulvla-h7777-77774-qaacq-cai"
   },
   "icp_frontend": {
-    "local": "uzt4z-lp777-77774-qaabq-cai"
+    "local": "ucwa4-rx777-77774-qaada-cai"
   },
   "icp_governance": {
     "local": "umunu-kh777-77774-qaaca-cai"
   },
   "icp_pool": {
-    "local": "ulvla-h7777-77774-qaacq-cai"
+    "local": "uzt4z-lp777-77774-qaabq-cai"
   }
 }

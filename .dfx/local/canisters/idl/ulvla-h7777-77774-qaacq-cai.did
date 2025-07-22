@@ -29,7 +29,7 @@ type Result_3 = variant { Ok : vec GenericCoverInfo; Err : text };
 type Result_4 = variant { Ok : Cover; Err : text };
 type Result_5 = variant { Ok : nat; Err : text };
 type RiskType = variant { Stablecoin; Slashing; SmartContract; Protocol };
-service : {
+service : (principal, principal, principal, principal) -> {
   claimPayoutForLP : (nat) -> (Result);
   createCover : (nat, text, RiskType, text, text, nat, nat, nat) -> (Result);
   deleteExpiredUserCovers : (principal) -> (Result);
