@@ -93,9 +93,9 @@ const LandingPage: React.FC = () => {
       
       const networkMaterial = new THREE.LineBasicMaterial({
         vertexColors: true,
-        transparent: true,
-        opacity: 0.3,
-      });
+      transparent: true,
+      opacity: 0.3,
+    });
       
       return new THREE.LineSegments(networkGeometry, networkMaterial);
     };
@@ -187,20 +187,6 @@ const LandingPage: React.FC = () => {
               Experience the future of decentralized finance with BQBTC - lightning-fast transactions, 
               enterprise security, and true decentralization.
             </p>
-            <div className="hero-features">
-              <div className="hero-feature">
-                <span className="feature-icon">⚡</span>
-                <span>1.1s Finality</span>
-              </div>
-              <div className="hero-feature">
-                <span className="feature-icon">🔒</span>
-                <span>99.9% Uptime</span>
-              </div>
-              <div className="hero-feature">
-                <span className="feature-icon">🌐</span>
-                <span>500+ Nodes</span>
-              </div>
-            </div>
             <div className="cta-buttons">
               <Link to="/dashboard" className="btn-primary">
                 <span className="btn-icon">🚀</span>
@@ -211,71 +197,6 @@ const LandingPage: React.FC = () => {
                 <span className="btn-icon">🔍</span>
                 <span>Learn More</span>
               </a>
-            </div>
-          </div>
-          
-          {/* Hero Right Side - Compact Design */}
-          <div className="hero-right">
-            <div className="hero-visual">
-              <div className="blockchain-network">
-                <div className="network-node" style={{ top: '20%', left: '30%' }}>
-                  <div className="node-glow"></div>
-                </div>
-                <div className="network-node" style={{ top: '60%', left: '70%' }}>
-                  <div className="node-glow"></div>
-                </div>
-                <div className="network-node" style={{ top: '40%', left: '20%' }}>
-                  <div className="node-glow"></div>
-                </div>
-                <div className="network-node" style={{ top: '80%', left: '50%' }}>
-                  <div className="node-glow"></div>
-                </div>
-                <div className="network-node" style={{ top: '10%', left: '80%' }}>
-                  <div className="node-glow"></div>
-                </div>
-                <div className="network-connection"></div>
-                <div className="network-connection"></div>
-                <div className="network-connection"></div>
-              </div>
-              
-              <div className="hero-stats-overlay">
-                <div className="stat-highlight">
-                  <div className="stat-icon-large">💰</div>
-                  <div className="stat-content">
-                    <div className="stat-value">$10.2M</div>
-                    <div className="stat-label">TVL</div>
-                  </div>
-                </div>
-                
-                <div className="stat-highlight">
-                  <div className="stat-icon-large">👥</div>
-                  <div className="stat-content">
-                    <div className="stat-value">2,847</div>
-                    <div className="stat-label">Users</div>
-                  </div>
-                </div>
-                
-                <div className="stat-highlight">
-                  <div className="stat-icon-large">📈</div>
-                  <div className="stat-content">
-                    <div className="stat-value">12.5%</div>
-                    <div className="stat-label">APY</div>
-                  </div>
-                </div>
-                
-                <div className="stat-highlight">
-                  <div className="stat-icon-large">⚡</div>
-                  <div className="stat-content">
-                    <div className="stat-value">99.9%</div>
-                    <div className="stat-label">Uptime</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="hero-quote">
-              <div className="quote-icon">💎</div>
-              <p>"The future of DeFi is here."</p>
             </div>
           </div>
         </div>
@@ -593,26 +514,26 @@ const LandingPage: React.FC = () => {
           <div className="stats-grid">
             <div className="stat-item blockchain-card">
               <div className="stat-icon">💰</div>
-              <h3>$10M+</h3>
-              <p>Total Value Locked</p>
+            <h3>$10M+</h3>
+            <p>Total Value Locked</p>
               <div className="card-glow"></div>
-            </div>
+          </div>
             <div className="stat-item blockchain-card">
               <div className="stat-icon">👥</div>
-              <h3>50K+</h3>
-              <p>Active Users</p>
+            <h3>50K+</h3>
+            <p>Active Users</p>
               <div className="card-glow"></div>
-            </div>
+          </div>
             <div className="stat-item blockchain-card">
               <div className="stat-icon">⚡</div>
-              <h3>99.9%</h3>
-              <p>Uptime</p>
+            <h3>99.9%</h3>
+            <p>Uptime</p>
               <div className="card-glow"></div>
-            </div>
+          </div>
             <div className="stat-item blockchain-card">
               <div className="stat-icon">🌍</div>
-              <h3>24/7</h3>
-              <p>Global Access</p>
+            <h3>24/7</h3>
+            <p>Global Access</p>
               <div className="card-glow"></div>
             </div>
           </div>

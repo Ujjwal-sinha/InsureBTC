@@ -125,12 +125,13 @@ body {
   width: 100%;
 }
 
+/* Button Styles - Rectangular */
 .dashboard-btn {
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 50px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -205,23 +206,22 @@ body {
 
 /* Hero Section */
 .hero {
-  min-height: 80vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 100px 2rem 2rem;
+  padding: 60px 2rem 2rem;
   z-index: 10;
   background: rgba(10, 11, 15, 0.8);
   backdrop-filter: blur(10px);
 }
 
 .hero-content {
-  max-width: 1200px;
+  max-width: 800px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  display: flex;
+  justify-content: center;
   align-items: center;
   position: relative;
   z-index: 11;
@@ -230,105 +230,44 @@ body {
 .hero-text {
   z-index: 12;
   position: relative;
+  text-align: center;
+  width: 100%;
 }
 
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 50px;
+  border-radius: 25px;
   font-size: 0.75rem;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1rem;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-  animation: pulse 2s infinite;
-  position: relative;
-  z-index: 13;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.badge-icon {
-  font-size: 1rem;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
 .hero-text h1 {
   font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 900;
+  font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.1;
-  position: relative;
-  z-index: 13;
   text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-}
-
-.gradient-text {
-  color: #3b82f6;
-  position: relative;
-  z-index: 13;
-}
-
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  color: white;
 }
 
 .hero-description {
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1.5rem;
-  max-width: 500px;
-  line-height: 1.6;
-  position: relative;
-  z-index: 13;
-  font-weight: 400;
-}
-
-.hero-features {
-  display: flex;
-  gap: 1rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 13;
-}
-
-.hero-feature {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(59, 130, 246, 0.1);
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
-  position: relative;
-  z-index: 13;
-}
-
-.hero-feature:hover {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(59, 130, 246, 0.4);
-  color: #3b82f6;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
-}
-
-.hero-feature .feature-icon {
-  font-size: 0.9rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 .cta-buttons {
@@ -337,14 +276,16 @@ body {
   flex-wrap: wrap;
   position: relative;
   z-index: 13;
+  justify-content: center;
+  width: 100%;
 }
 
 .btn-primary {
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   color: white;
   border: none;
-  padding: 0.875rem 1.5rem;
-  border-radius: 50px;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -359,6 +300,8 @@ body {
   z-index: 13;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  min-width: 180px;
+  justify-content: center;
 }
 
 .btn-primary:hover {
@@ -384,8 +327,8 @@ body {
   background: rgba(59, 130, 246, 0.1);
   color: #3b82f6;
   border: 2px solid rgba(59, 130, 246, 0.3);
-  padding: 0.875rem 1.5rem;
-  border-radius: 50px;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -400,6 +343,8 @@ body {
   z-index: 13;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  min-width: 180px;
+  justify-content: center;
 }
 
 .btn-secondary:hover {
@@ -1000,7 +945,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* CTA Section */
+/* CTA Section - Centered Buttons */
 .cta-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
@@ -1025,6 +970,68 @@ body {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
+}
+
+.cta-buttons-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.cta-btn-primary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(10px);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.cta-btn-primary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.cta-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer */
@@ -1251,8 +1258,9 @@ body {
   color: #9ca3af;
 }
 
+/* Dashboard Card Buttons */
 .dashboard-card button {
-  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -1262,6 +1270,9 @@ body {
   transition: all 0.3s ease;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
 }
 
 .dashboard-card button:hover {
@@ -1276,6 +1287,7 @@ body {
   box-shadow: none;
 }
 
+/* Back Button */
 .back-btn {
   background: #f3f4f6;
   color: #4a5568;
@@ -1288,6 +1300,9 @@ body {
   text-decoration: none;
   display: inline-block;
   margin-bottom: 2rem;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
 }
 
 .back-btn:hover {

@@ -5,17 +5,20 @@ const CTASection: React.FC = () => {
   return (
     <section className="cta-section">
       <div className="cta-container">
-        <h2>Ready to Start Your DeFi Journey?</h2>
+        <h2>Ready to Experience the Future of DeFi?</h2>
         <p>
-          Join thousands of users who are already earning, governing, and building the future of finance on the Internet Computer.
+          Join thousands of users who are already benefiting from BQBTC's advanced 
+          DeFi platform. Start your journey today with lightning-fast transactions 
+          and enterprise-grade security.
         </p>
-        <div className="cta-buttons">
-          <Link to="/dashboard" className="btn-primary">
-            <span>🚀 Launch App</span>
-            <div className="btn-glow"></div>
+        <div className="cta-buttons-container">
+          <Link to="/dashboard" className="cta-btn-primary">
+            <span className="btn-icon">🚀</span>
+            <span>Launch App Now</span>
           </Link>
-          <a href="#features" className="btn-secondary">
-            <span>🔍 Learn More</span>
+          <a href="#features" className="cta-btn-secondary">
+            <span className="btn-icon">🔍</span>
+            <span>Explore Features</span>
           </a>
         </div>
       </div>
