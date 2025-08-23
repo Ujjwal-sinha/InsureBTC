@@ -184,8 +184,7 @@ const LandingPage: React.FC = () => {
               <span className="gradient-text">DEFI PROTOCOL</span>
             </h1>
             <p className="hero-description">
-              Experience the future of decentralized finance with BQBTC - the most advanced 
-              DeFi platform built on the Internet Computer. Lightning-fast transactions, 
+              Experience the future of decentralized finance with BQBTC - lightning-fast transactions, 
               enterprise security, and true decentralization.
             </p>
             <div className="hero-features">
@@ -215,7 +214,7 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
           
-          {/* Hero Right Side - Beautiful Design */}
+          {/* Hero Right Side - Compact Design */}
           <div className="hero-right">
             <div className="hero-visual">
               <div className="blockchain-network">
@@ -244,7 +243,7 @@ const LandingPage: React.FC = () => {
                   <div className="stat-icon-large">💰</div>
                   <div className="stat-content">
                     <div className="stat-value">$10.2M</div>
-                    <div className="stat-label">Total Value Locked</div>
+                    <div className="stat-label">TVL</div>
                   </div>
                 </div>
                 
@@ -252,7 +251,7 @@ const LandingPage: React.FC = () => {
                   <div className="stat-icon-large">👥</div>
                   <div className="stat-content">
                     <div className="stat-value">2,847</div>
-                    <div className="stat-label">Active Users</div>
+                    <div className="stat-label">Users</div>
                   </div>
                 </div>
                 
@@ -260,7 +259,7 @@ const LandingPage: React.FC = () => {
                   <div className="stat-icon-large">📈</div>
                   <div className="stat-content">
                     <div className="stat-value">12.5%</div>
-                    <div className="stat-label">Average APY</div>
+                    <div className="stat-label">APY</div>
                   </div>
                 </div>
                 
@@ -276,8 +275,7 @@ const LandingPage: React.FC = () => {
             
             <div className="hero-quote">
               <div className="quote-icon">💎</div>
-              <p>"The future of DeFi is here. Experience lightning-fast transactions with enterprise-grade security."</p>
-              <div className="quote-author">- BQBTC Protocol</div>
+              <p>"The future of DeFi is here."</p>
             </div>
           </div>
         </div>
