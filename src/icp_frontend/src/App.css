@@ -126,6 +126,24 @@ body {
   z-index: 3;
 }
 
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .hero-text h1 {
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 900;
@@ -150,9 +168,41 @@ body {
 .hero-text p {
   font-size: 1.2rem;
   color: #4a5568;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   max-width: 600px;
   line-height: 1.8;
+}
+
+.hero-features {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  transition: all 0.3s ease;
+}
+
+.hero-feature:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.hero-feature .feature-icon {
+  font-size: 1rem;
 }
 
 .cta-buttons {
@@ -221,6 +271,177 @@ body {
 /* Hero Stats Container */
 .hero-stats-container {
   z-index: 3;
+}
+
+/* ICP Benefits Section */
+.icp-benefits {
+  padding: 8rem 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  position: relative;
+  z-index: 2;
+}
+
+.icp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.icp-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.icp-subtitle {
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.icp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.icp-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.icp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+  transition: left 0.5s;
+}
+
+.icp-card:hover::before {
+  left: 100%;
+}
+
+.icp-card:hover {
+  transform: translateY(-10px);
+  border-color: #3b82f6;
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.icp-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.icp-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1a202c;
+  position: relative;
+  z-index: 1;
+}
+
+.icp-card p {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.icp-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #3b82f6;
+  margin-bottom: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Technology Stack Section */
+.tech-stack {
+  padding: 6rem 2rem;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+.tech-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.tech-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tech-item:hover {
+  transform: translateY(-5px);
+  border-color: #3b82f6;
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
+}
+
+.tech-logo {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.tech-item h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1a202c;
+}
+
+.tech-item p {
+  color: #4a5568;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 /* Features Section */
@@ -309,8 +530,30 @@ body {
 .feature-card p {
   color: #4a5568;
   line-height: 1.6;
+  margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
+}
+
+.feature-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.feature-link:hover {
+  color: #1d4ed8;
+  transform: translateX(4px);
 }
 
 /* About Section */
@@ -736,12 +979,24 @@ body {
     font-size: 3rem;
   }
 
+  .hero-features {
+    justify-content: center;
+  }
+
   .cta-buttons {
     flex-direction: column;
     align-items: center;
   }
 
   .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .icp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-grid {
     grid-template-columns: 1fr;
   }
 
@@ -782,6 +1037,11 @@ body {
   
   .hero h1 {
     font-size: 2.5rem;
+  }
+  
+  .hero-features {
+    flex-direction: column;
+    align-items: center;
   }
   
   .stats-container {

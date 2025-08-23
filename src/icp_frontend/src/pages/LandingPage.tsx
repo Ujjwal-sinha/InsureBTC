@@ -106,6 +106,7 @@ const LandingPage: React.FC = () => {
           <div className="logo">BQBTC</div>
           <ul className="nav-links">
             <li><a href="#features">Features</a></li>
+            <li><a href="#icp-benefits">ICP Benefits</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#stats">Stats</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -120,6 +121,9 @@ const LandingPage: React.FC = () => {
       <section className="hero">
         <div className="hero-content">
           <div className="hero-text">
+            <div className="hero-badge">
+              <span>🚀 Powered by Internet Computer</span>
+            </div>
             <h1>
               <span className="gradient-text">The Future of</span>
               <br />
@@ -129,13 +133,27 @@ const LandingPage: React.FC = () => {
               Experience next-generation DeFi with BQBTC - your gateway to governance, 
               liquidity pools, insurance coverage, and seamless token management on the Internet Computer.
             </p>
+            <div className="hero-features">
+              <div className="hero-feature">
+                <span className="feature-icon">⚡</span>
+                <span>Lightning Fast</span>
+              </div>
+              <div className="hero-feature">
+                <span className="feature-icon">🔒</span>
+                <span>Enterprise Security</span>
+              </div>
+              <div className="hero-feature">
+                <span className="feature-icon">🌐</span>
+                <span>Truly Decentralized</span>
+              </div>
+            </div>
             <div className="cta-buttons">
               <Link to="/dashboard" className="btn-primary">
                 <span>🚀 Get Started</span>
                 <div className="btn-glow"></div>
               </Link>
-              <a href="#features" className="btn-secondary">
-                <span>🔍 Learn More</span>
+              <a href="#icp-benefits" className="btn-secondary">
+                <span>🔍 Learn About ICP</span>
               </a>
             </div>
           </div>
@@ -143,6 +161,74 @@ const LandingPage: React.FC = () => {
           {/* Hero Stats */}
           <div className="hero-stats-container">
             <HeroStats />
+          </div>
+        </div>
+      </section>
+
+      {/* ICP Benefits Section */}
+      <section className="icp-benefits" id="icp-benefits">
+        <div className="icp-container">
+          <div className="icp-header">
+            <h2 className="section-title">
+              <span className="gradient-text">Why Internet Computer?</span>
+            </h2>
+            <p className="icp-subtitle">
+              Discover how ICP revolutionizes DeFi with unmatched performance, security, and decentralization
+            </p>
+          </div>
+          
+          <div className="icp-grid">
+            <div className="icp-card">
+              <div className="icp-icon">⚡</div>
+              <h3>Web Speed Performance</h3>
+              <p>
+                Sub-second finality with unlimited scalability. Process thousands of transactions 
+                per second with instant confirmation, just like traditional web applications.
+              </p>
+              <div className="icp-metric">
+                <span className="metric-value">1.1s</span>
+                <span className="metric-label">Finality</span>
+              </div>
+            </div>
+            
+            <div className="icp-card">
+              <div className="icp-icon">🔒</div>
+              <h3>Enterprise Security</h3>
+              <p>
+                Advanced cryptography and consensus mechanisms ensure your assets are protected 
+                with military-grade security. No private keys to manage or lose.
+              </p>
+              <div className="icp-metric">
+                <span className="metric-value">99.9%</span>
+                <span className="metric-label">Uptime</span>
+              </div>
+            </div>
+            
+            <div className="icp-card">
+              <div className="icp-icon">🌐</div>
+              <h3>True Decentralization</h3>
+              <p>
+                No single point of failure. Distributed across hundreds of independent data centers 
+                worldwide, ensuring censorship resistance and global accessibility.
+              </p>
+              <div className="icp-metric">
+                <span className="metric-value">500+</span>
+                <span className="metric-label">Nodes</span>
+              </div>
+            </div>
+            
+            <div className="icp-card">
+              <div className="icp-icon">💡</div>
+              <h3>Smart Contract Innovation</h3>
+              <p>
+                Canister smart contracts with automatic scaling, persistent memory, 
+                and seamless integration with traditional web technologies.
+              </p>
+              <div className="icp-metric">
+                <span className="metric-value">∞</span>
+                <span className="metric-label">Scalability</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -161,6 +247,9 @@ const LandingPage: React.FC = () => {
                 Mint, burn, and transfer BQBTC tokens with ease. Full control over your digital assets 
                 with enterprise-grade security on the Internet Computer.
               </p>
+              <div className="feature-actions">
+                <Link to="/dashboard" className="feature-link">Manage Tokens →</Link>
+              </div>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🏛️</div>
@@ -169,6 +258,9 @@ const LandingPage: React.FC = () => {
                 Participate in community-driven decisions. Vote on proposals, 
                 manage protocol parameters, and shape the future of BQBTC ecosystem.
               </p>
+              <div className="feature-actions">
+                <Link to="/governance" className="feature-link">View Proposals →</Link>
+              </div>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🛡️</div>
@@ -177,6 +269,9 @@ const LandingPage: React.FC = () => {
                 Protect your investments with comprehensive coverage options. 
                 Smart contract insurance and risk management tools for peace of mind.
               </p>
+              <div className="feature-actions">
+                <Link to="/cover" className="feature-link">Get Coverage →</Link>
+              </div>
             </div>
             <div className="feature-card">
               <div className="feature-icon">💧</div>
@@ -185,6 +280,40 @@ const LandingPage: React.FC = () => {
                 Provide liquidity and earn rewards. Access deep liquidity pools 
                 with competitive yields and automated market-making strategies.
               </p>
+              <div className="feature-actions">
+                <Link to="/pool" className="feature-link">Join Pools →</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack Section */}
+      <section className="tech-stack">
+        <div className="tech-container">
+          <h2 className="section-title">
+            <span className="gradient-text">Built on Cutting-Edge Technology</span>
+          </h2>
+          <div className="tech-grid">
+            <div className="tech-item">
+              <div className="tech-logo">🌐</div>
+              <h4>Internet Computer</h4>
+              <p>World's first web-speed blockchain</p>
+            </div>
+            <div className="tech-item">
+              <div className="tech-logo">🔗</div>
+              <h4>Chain Key Technology</h4>
+              <p>Advanced cryptography & consensus</p>
+            </div>
+            <div className="tech-item">
+              <div className="tech-logo">⚡</div>
+              <h4>Canister Smart Contracts</h4>
+              <p>Scalable & persistent execution</p>
+            </div>
+            <div className="tech-item">
+              <div className="tech-logo">🛡️</div>
+              <h4>Threshold Signatures</h4>
+              <p>Military-grade security</p>
             </div>
           </div>
         </div>
@@ -260,6 +389,7 @@ const LandingPage: React.FC = () => {
             <h4>Quick Links</h4>
             <div>
               <a href="#features">Features</a><br />
+              <a href="#icp-benefits">ICP Benefits</a><br />
               <a href="#about">About</a><br />
               <a href="#stats">Statistics</a><br />
               <Link to="/dashboard">Dashboard</Link>
