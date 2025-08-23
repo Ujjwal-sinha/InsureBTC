@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Principal } from '@dfinity/principal';
 import { getBQBTCActor } from '../utils/actor';
 import DashboardLayout from '../components/DashboardLayout';
+import Footer from '../components/Footer';
 
 interface TokenMetadata {
   decimals: number;
@@ -423,6 +424,7 @@ const Dashboard: React.FC = () => {
           {error}
         </div>
       )}
+      <Footer />
     </DashboardLayout>
   );
 };

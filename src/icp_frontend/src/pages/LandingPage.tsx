@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as THREE from 'three';
 import HeroStats from '../components/HeroStats';
 import CTASection from '../components/CTASection';
+import Footer from '../components/Footer';
 
 const LandingPage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -544,53 +545,7 @@ const LandingPage: React.FC = () => {
       <CTASection />
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-section">
-            <div className="footer-logo">
-              <span className="logo-icon">⚡</span>
-              <span className="logo-text">BQBTC</span>
-              <span className="logo-badge">PROTOCOL</span>
-            </div>
-            <p>
-              Building the future of decentralized finance on the Internet Computer. 
-              Secure, scalable, and user-friendly DeFi solutions.
-            </p>
-          </div>
-          <div className="footer-section">
-            <h4>Quick Links</h4>
-            <div className="footer-links">
-              <a href="#features">Features</a>
-              <a href="#icp-benefits">ICP Benefits</a>
-              <a href="#technology">Technology</a>
-              <a href="#about">About</a>
-              <a href="#stats">Statistics</a>
-              <Link to="/dashboard">Dashboard</Link>
-            </div>
-          </div>
-          <div className="footer-section">
-            <h4>Products</h4>
-            <div className="footer-links">
-              <Link to="/dashboard">Token Management</Link>
-              <Link to="/governance">Governance</Link>
-              <Link to="/cover">Insurance Cover</Link>
-              <Link to="/pool">Liquidity Pools</Link>
-            </div>
-          </div>
-          <div className="footer-section">
-            <h4>Community</h4>
-            <div className="footer-links">
-              <a href="#">Twitter</a>
-              <a href="#">Discord</a>
-              <a href="#">Telegram</a>
-              <a href="#">GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>© 2024 BQBTC Protocol. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
