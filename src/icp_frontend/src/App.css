@@ -206,12 +206,12 @@ body {
 
 /* Hero Section */
 .hero {
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 100px 2rem 2rem;
+  padding: 120px 2rem 4rem;
   z-index: 10;
   background: rgba(10, 11, 15, 0.8);
   backdrop-filter: blur(10px);
@@ -244,7 +244,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -253,7 +253,7 @@ body {
 .hero-text h1 {
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   line-height: 1.1;
   text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   color: white;
@@ -262,7 +262,7 @@ body {
 .hero-description {
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
