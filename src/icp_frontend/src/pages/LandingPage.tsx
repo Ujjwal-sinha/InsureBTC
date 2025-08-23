@@ -103,16 +103,20 @@ const LandingPage: React.FC = () => {
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
-          <div className="logo">BQBTC</div>
+          <div className="logo">
+            <span className="logo-icon">🚀</span>
+            <span className="logo-text">BQBTC</span>
+          </div>
           <ul className="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#icp-benefits">ICP Benefits</a></li>
+            <li><a href="#technology">Technology</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#stats">Stats</a></li>
-            <li><a href="#contact">Contact</a></li>
           </ul>
           <Link to="/dashboard" className="dashboard-btn">
-            Launch Dashboard
+            <span className="btn-icon">⚡</span>
+            <span>Launch App</span>
           </Link>
         </div>
       </nav>
@@ -122,38 +126,42 @@ const LandingPage: React.FC = () => {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-badge">
-              <span>🚀 Powered by Internet Computer</span>
+              <span className="badge-icon">🌐</span>
+              <span>Powered by Internet Computer</span>
             </div>
             <h1>
-              <span className="gradient-text">The Future of</span>
+              <span className="gradient-text">Next-Generation</span>
               <br />
-              <span className="gradient-text">Decentralized Finance</span>
+              <span className="gradient-text">DeFi Protocol</span>
             </h1>
-            <p>
-              Experience next-generation DeFi with BQBTC - your gateway to governance, 
-              liquidity pools, insurance coverage, and seamless token management on the Internet Computer.
+            <p className="hero-description">
+              Experience the future of decentralized finance with BQBTC - the most advanced 
+              DeFi platform built on the Internet Computer. Lightning-fast transactions, 
+              enterprise security, and true decentralization.
             </p>
             <div className="hero-features">
               <div className="hero-feature">
                 <span className="feature-icon">⚡</span>
-                <span>Lightning Fast</span>
+                <span>1.1s Finality</span>
               </div>
               <div className="hero-feature">
                 <span className="feature-icon">🔒</span>
-                <span>Enterprise Security</span>
+                <span>99.9% Uptime</span>
               </div>
               <div className="hero-feature">
                 <span className="feature-icon">🌐</span>
-                <span>Truly Decentralized</span>
+                <span>500+ Nodes</span>
               </div>
             </div>
             <div className="cta-buttons">
               <Link to="/dashboard" className="btn-primary">
-                <span>🚀 Get Started</span>
+                <span className="btn-icon">🚀</span>
+                <span>Get Started Free</span>
                 <div className="btn-glow"></div>
               </Link>
               <a href="#icp-benefits" className="btn-secondary">
-                <span>🔍 Learn About ICP</span>
+                <span className="btn-icon">🔍</span>
+                <span>Learn More</span>
               </a>
             </div>
           </div>
@@ -163,16 +171,40 @@ const LandingPage: React.FC = () => {
             <HeroStats />
           </div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="floating-elements">
+          <div className="floating-card" style={{ animationDelay: '0s' }}>
+            <div className="card-icon">🪙</div>
+            <div className="card-text">Token Management</div>
+          </div>
+          <div className="floating-card" style={{ animationDelay: '1s' }}>
+            <div className="card-icon">🏛️</div>
+            <div className="card-text">Governance</div>
+          </div>
+          <div className="floating-card" style={{ animationDelay: '2s' }}>
+            <div className="card-icon">🛡️</div>
+            <div className="card-text">Insurance</div>
+          </div>
+          <div className="floating-card" style={{ animationDelay: '3s' }}>
+            <div className="card-icon">💧</div>
+            <div className="card-text">Liquidity</div>
+          </div>
+        </div>
       </section>
 
       {/* ICP Benefits Section */}
       <section className="icp-benefits" id="icp-benefits">
         <div className="icp-container">
-          <div className="icp-header">
+          <div className="section-header">
+            <div className="section-badge">
+              <span className="badge-icon">⚡</span>
+              <span>Why Internet Computer?</span>
+            </div>
             <h2 className="section-title">
-              <span className="gradient-text">Why Internet Computer?</span>
+              <span className="gradient-text">Revolutionary Technology</span>
             </h2>
-            <p className="icp-subtitle">
+            <p className="section-subtitle">
               Discover how ICP revolutionizes DeFi with unmatched performance, security, and decentralization
             </p>
           </div>
@@ -236,9 +268,19 @@ const LandingPage: React.FC = () => {
       {/* Features Section */}
       <section className="features" id="features">
         <div className="features-container">
-          <h2 className="section-title">
-            <span className="gradient-text">Powerful DeFi Features</span>
-          </h2>
+          <div className="section-header">
+            <div className="section-badge">
+              <span className="badge-icon">🛠️</span>
+              <span>DeFi Features</span>
+            </div>
+            <h2 className="section-title">
+              <span className="gradient-text">Complete DeFi Suite</span>
+            </h2>
+            <p className="section-subtitle">
+              Everything you need for modern decentralized finance in one platform
+            </p>
+          </div>
+          
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">🪙</div>
@@ -248,7 +290,10 @@ const LandingPage: React.FC = () => {
                 with enterprise-grade security on the Internet Computer.
               </p>
               <div className="feature-actions">
-                <Link to="/dashboard" className="feature-link">Manage Tokens →</Link>
+                <Link to="/dashboard" className="feature-link">
+                  <span>Manage Tokens</span>
+                  <span className="arrow">→</span>
+                </Link>
               </div>
             </div>
             <div className="feature-card">
@@ -259,7 +304,10 @@ const LandingPage: React.FC = () => {
                 manage protocol parameters, and shape the future of BQBTC ecosystem.
               </p>
               <div className="feature-actions">
-                <Link to="/governance" className="feature-link">View Proposals →</Link>
+                <Link to="/governance" className="feature-link">
+                  <span>View Proposals</span>
+                  <span className="arrow">→</span>
+                </Link>
               </div>
             </div>
             <div className="feature-card">
@@ -270,7 +318,10 @@ const LandingPage: React.FC = () => {
                 Smart contract insurance and risk management tools for peace of mind.
               </p>
               <div className="feature-actions">
-                <Link to="/cover" className="feature-link">Get Coverage →</Link>
+                <Link to="/cover" className="feature-link">
+                  <span>Get Coverage</span>
+                  <span className="arrow">→</span>
+                </Link>
               </div>
             </div>
             <div className="feature-card">
@@ -281,7 +332,10 @@ const LandingPage: React.FC = () => {
                 with competitive yields and automated market-making strategies.
               </p>
               <div className="feature-actions">
-                <Link to="/pool" className="feature-link">Join Pools →</Link>
+                <Link to="/pool" className="feature-link">
+                  <span>Join Pools</span>
+                  <span className="arrow">→</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -289,11 +343,21 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Technology Stack Section */}
-      <section className="tech-stack">
+      <section className="tech-stack" id="technology">
         <div className="tech-container">
-          <h2 className="section-title">
-            <span className="gradient-text">Built on Cutting-Edge Technology</span>
-          </h2>
+          <div className="section-header">
+            <div className="section-badge">
+              <span className="badge-icon">🔬</span>
+              <span>Technology</span>
+            </div>
+            <h2 className="section-title">
+              <span className="gradient-text">Cutting-Edge Technology</span>
+            </h2>
+            <p className="section-subtitle">
+              Built on the most advanced blockchain technology available
+            </p>
+          </div>
+          
           <div className="tech-grid">
             <div className="tech-item">
               <div className="tech-logo">🌐</div>
@@ -322,29 +386,58 @@ const LandingPage: React.FC = () => {
       {/* About Section */}
       <section className="about" id="about">
         <div className="about-container">
-          <h2 className="section-title">
-            <span className="gradient-text">Built for the Future</span>
-          </h2>
-          <p className="about-description">
-            BQBTC is built on the Internet Computer, providing unprecedented scalability, 
-            security, and decentralization. Our protocol combines the best of traditional 
-            finance with the innovation of blockchain technology.
-          </p>
-          <div className="about-features">
-            <div className="about-feature">
-              <div className="about-icon">🔒</div>
-              <h3>Secure</h3>
-              <p>Enterprise-grade security with multi-layer protection</p>
+          <div className="section-header">
+            <div className="section-badge">
+              <span className="badge-icon">🎯</span>
+              <span>About BQBTC</span>
             </div>
-            <div className="about-feature">
-              <div className="about-icon">⚡</div>
-              <h3>Fast</h3>
-              <p>Lightning-fast transactions with instant finality</p>
+            <h2 className="section-title">
+              <span className="gradient-text">Built for the Future</span>
+            </h2>
+            <p className="section-subtitle">
+              Combining the best of traditional finance with blockchain innovation
+            </p>
+          </div>
+          
+          <div className="about-content">
+            <div className="about-text">
+              <p className="about-description">
+                BQBTC is built on the Internet Computer, providing unprecedented scalability, 
+                security, and decentralization. Our protocol combines the best of traditional 
+                finance with the innovation of blockchain technology to create a truly 
+                next-generation DeFi experience.
+              </p>
+              <div className="about-stats">
+                <div className="about-stat">
+                  <span className="stat-number">$10M+</span>
+                  <span className="stat-label">Total Value Locked</span>
+                </div>
+                <div className="about-stat">
+                  <span className="stat-number">50K+</span>
+                  <span className="stat-label">Active Users</span>
+                </div>
+                <div className="about-stat">
+                  <span className="stat-number">99.9%</span>
+                  <span className="stat-label">Uptime</span>
+                </div>
+              </div>
             </div>
-            <div className="about-feature">
-              <div className="about-icon">🌐</div>
-              <h3>Decentralized</h3>
-              <p>True decentralization with community governance</p>
+            <div className="about-features">
+              <div className="about-feature">
+                <div className="about-icon">🔒</div>
+                <h3>Secure</h3>
+                <p>Enterprise-grade security with multi-layer protection</p>
+              </div>
+              <div className="about-feature">
+                <div className="about-icon">⚡</div>
+                <h3>Fast</h3>
+                <p>Lightning-fast transactions with instant finality</p>
+              </div>
+              <div className="about-feature">
+                <div className="about-icon">🌐</div>
+                <h3>Decentralized</h3>
+                <p>True decentralization with community governance</p>
+              </div>
             </div>
           </div>
         </div>
@@ -353,21 +446,32 @@ const LandingPage: React.FC = () => {
       {/* Statistics Section */}
       <section className="stats" id="stats">
         <div className="stats-container">
-          <div className="stat-item">
-            <h3>$10M+</h3>
-            <p>Total Value Locked</p>
+          <div className="section-header">
+            <h2 className="section-title">
+              <span className="gradient-text">Platform Statistics</span>
+            </h2>
           </div>
-          <div className="stat-item">
-            <h3>50K+</h3>
-            <p>Active Users</p>
-          </div>
-          <div className="stat-item">
-            <h3>99.9%</h3>
-            <p>Uptime</p>
-          </div>
-          <div className="stat-item">
-            <h3>24/7</h3>
-            <p>Global Access</p>
+          <div className="stats-grid">
+            <div className="stat-item">
+              <div className="stat-icon">💰</div>
+              <h3>$10M+</h3>
+              <p>Total Value Locked</p>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">👥</div>
+              <h3>50K+</h3>
+              <p>Active Users</p>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">⚡</div>
+              <h3>99.9%</h3>
+              <p>Uptime</p>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">🌍</div>
+              <h3>24/7</h3>
+              <p>Global Access</p>
+            </div>
           </div>
         </div>
       </section>
@@ -376,10 +480,13 @@ const LandingPage: React.FC = () => {
       <CTASection />
 
       {/* Footer */}
-      <footer className="footer" id="contact">
+      <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
-            <h4>BQBTC Protocol</h4>
+            <div className="footer-logo">
+              <span className="logo-icon">🚀</span>
+              <span className="logo-text">BQBTC</span>
+            </div>
             <p>
               Building the future of decentralized finance on the Internet Computer. 
               Secure, scalable, and user-friendly DeFi solutions.
@@ -387,35 +494,36 @@ const LandingPage: React.FC = () => {
           </div>
           <div className="footer-section">
             <h4>Quick Links</h4>
-            <div>
-              <a href="#features">Features</a><br />
-              <a href="#icp-benefits">ICP Benefits</a><br />
-              <a href="#about">About</a><br />
-              <a href="#stats">Statistics</a><br />
+            <div className="footer-links">
+              <a href="#features">Features</a>
+              <a href="#icp-benefits">ICP Benefits</a>
+              <a href="#technology">Technology</a>
+              <a href="#about">About</a>
+              <a href="#stats">Statistics</a>
               <Link to="/dashboard">Dashboard</Link>
             </div>
           </div>
           <div className="footer-section">
             <h4>Products</h4>
-            <div>
-              <Link to="/dashboard">Token Management</Link><br />
-              <Link to="/governance">Governance</Link><br />
-              <Link to="/cover">Insurance Cover</Link><br />
+            <div className="footer-links">
+              <Link to="/dashboard">Token Management</Link>
+              <Link to="/governance">Governance</Link>
+              <Link to="/cover">Insurance Cover</Link>
               <Link to="/pool">Liquidity Pools</Link>
             </div>
           </div>
           <div className="footer-section">
             <h4>Community</h4>
-            <div>
-              <a href="#">Twitter</a><br />
-              <a href="#">Discord</a><br />
-              <a href="#">Telegram</a><br />
+            <div className="footer-links">
+              <a href="#">Twitter</a>
+              <a href="#">Discord</a>
+              <a href="#">Telegram</a>
               <a href="#">GitHub</a>
             </div>
           </div>
         </div>
         <div className="footer-bottom">
-          © 2024 BQBTC Protocol. All rights reserved.
+          <p>© 2024 BQBTC Protocol. All rights reserved.</p>
         </div>
       </footer>
     </div>
