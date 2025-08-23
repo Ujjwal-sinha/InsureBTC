@@ -1,65 +1,79 @@
 
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as THREE from 'three';
+import HeroStats from '../components/HeroStats';
+import CTASection from '../components/CTASection';
 
-const LandingPage = () => {
+const LandingPage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    // Three.js setup
+    // Three.js setup - minimal and professional
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ 
+      canvas: canvasRef.current, 
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance"
+    });
     
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0xffffff, 0);
 
-    // Create floating particles
+    // Create minimal floating particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 2000;
+    const particlesCount = 200;
     const posArray = new Float32Array(particlesCount * 3);
 
-    for (let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 100;
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+      posArray[i] = (Math.random() - 0.5) * 400;
+      posArray[i + 1] = (Math.random() - 0.5) * 400;
+      posArray[i + 2] = (Math.random() - 0.5) * 400;
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.5,
-      color: 0x667eea,
+      size: 1,
+      color: 0x3b82f6,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.3,
+      blending: THREE.AdditiveBlending,
     });
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    // Create animated torus
-    const torusGeometry = new THREE.TorusGeometry(10, 3, 16, 100);
+    // Create minimal geometric accent
+    const torusGeometry = new THREE.TorusGeometry(30, 2, 8, 50);
     const torusMaterial = new THREE.MeshBasicMaterial({
-      color: 0x764ba2,
-      wireframe: true,
+      color: 0x3b82f6,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.1,
+      wireframe: true,
     });
     const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    torus.position.z = -100;
     scene.add(torus);
 
-    camera.position.z = 30;
+    camera.position.z = 100;
 
-    // Animation loop
+    // Subtle animation loop
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Rotate particles and torus
-      particlesMesh.rotation.y += 0.001;
-      particlesMesh.rotation.x += 0.0005;
-      torus.rotation.x += 0.01;
-      torus.rotation.y += 0.005;
+      // Very subtle particle movement
+      particlesMesh.rotation.y += 0.0002;
+      
+      // Slow torus rotation
+      torus.rotation.x += 0.002;
+      torus.rotation.y += 0.001;
 
       renderer.render(scene, camera);
     };
@@ -74,6 +88,7 @@ const LandingPage = () => {
     };
 
     window.addEventListener('resize', handleResize);
+    setIsLoaded(true);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -82,6 +97,7 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
+      {/* Minimal Three.js Canvas Background */}
       <canvas ref={canvasRef} className="three-canvas" />
       
       {/* Navigation */}
@@ -103,18 +119,30 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>The Future of Decentralized Finance</h1>
-          <p>
-            Experience next-generation DeFi with BQBTC - your gateway to governance, 
-            liquidity pools, insurance coverage, and seamless token management on the Internet Computer.
-          </p>
-          <div className="cta-buttons">
-            <Link to="/dashboard" className="btn-primary">
-              Get Started
-            </Link>
-            <a href="#features" className="btn-secondary">
-              Learn More
-            </a>
+          <div className="hero-text">
+            <h1>
+              <span className="gradient-text">The Future of</span>
+              <br />
+              <span className="gradient-text">Decentralized Finance</span>
+            </h1>
+            <p>
+              Experience next-generation DeFi with BQBTC - your gateway to governance, 
+              liquidity pools, insurance coverage, and seamless token management on the Internet Computer.
+            </p>
+            <div className="cta-buttons">
+              <Link to="/dashboard" className="btn-primary">
+                <span>🚀 Get Started</span>
+                <div className="btn-glow"></div>
+              </Link>
+              <a href="#features" className="btn-secondary">
+                <span>🔍 Learn More</span>
+              </a>
+            </div>
+          </div>
+          
+          {/* Hero Stats */}
+          <div className="hero-stats-container">
+            <HeroStats />
           </div>
         </div>
       </section>
@@ -122,7 +150,9 @@ const LandingPage = () => {
       {/* Features Section */}
       <section className="features" id="features">
         <div className="features-container">
-          <h2 className="section-title">Powerful DeFi Features</h2>
+          <h2 className="section-title">
+            <span className="gradient-text">Powerful DeFi Features</span>
+          </h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">🪙</div>
@@ -160,6 +190,37 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* About Section */}
+      <section className="about" id="about">
+        <div className="about-container">
+          <h2 className="section-title">
+            <span className="gradient-text">Built for the Future</span>
+          </h2>
+          <p className="about-description">
+            BQBTC is built on the Internet Computer, providing unprecedented scalability, 
+            security, and decentralization. Our protocol combines the best of traditional 
+            finance with the innovation of blockchain technology.
+          </p>
+          <div className="about-features">
+            <div className="about-feature">
+              <div className="about-icon">🔒</div>
+              <h3>Secure</h3>
+              <p>Enterprise-grade security with multi-layer protection</p>
+            </div>
+            <div className="about-feature">
+              <div className="about-icon">⚡</div>
+              <h3>Fast</h3>
+              <p>Lightning-fast transactions with instant finality</p>
+            </div>
+            <div className="about-feature">
+              <div className="about-icon">🌐</div>
+              <h3>Decentralized</h3>
+              <p>True decentralization with community governance</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Statistics Section */}
       <section className="stats" id="stats">
         <div className="stats-container">
@@ -181,6 +242,9 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* CTA Section */}
+      <CTASection />
 
       {/* Footer */}
       <footer className="footer" id="contact">
@@ -219,6 +283,9 @@ const LandingPage = () => {
               <a href="#">GitHub</a>
             </div>
           </div>
+        </div>
+        <div className="footer-bottom">
+          © 2024 BQBTC Protocol. All rights reserved.
         </div>
       </footer>
     </div>

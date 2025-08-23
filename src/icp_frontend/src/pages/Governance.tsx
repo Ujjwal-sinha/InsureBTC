@@ -1,91 +1,202 @@
 
 
-import { Link } from 'react-router-dom';
+import React from 'react';
+import DashboardLayout from '../components/DashboardLayout';
 
-const Governance = () => {
+const Governance: React.FC = () => {
   return (
-    <div className="dashboard-page">
-      <Link to="/" className="back-btn">← Back to Home</Link>
-      
-      <div className="dashboard-header">
-        <h1>🏛️ Governance</h1>
-        <p>Participate in decentralized governance and shape the future of BQBTC</p>
-      </div>
-
+    <DashboardLayout title="Governance" subtitle="Vote on proposals and manage protocol parameters">
       <div className="dashboard-grid">
         <div className="dashboard-card">
-          <h2>📊 Active Proposals</h2>
-          <p>View and vote on active governance proposals</p>
-          <div className="feature-placeholder">
-            <div style={{ padding: '2rem', textAlign: 'center', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', margin: '1rem 0' }}>
-              <h3>🗳️ Proposal #001</h3>
-              <p>Increase mint limit to 100M BQBTC</p>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1rem' }}>
-                <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>👍 Vote Yes</button>
-                <button className="btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>👎 Vote No</button>
+          <h2>🏛️ Active Proposals</h2>
+          <div style={{ 
+            background: '#f8fafc', 
+            padding: '1.5rem', 
+            borderRadius: '8px', 
+            border: '1px solid #e2e8f0',
+            marginBottom: '1.5rem'
+          }}>
+            <p style={{ color: '#6b7280', fontStyle: 'italic' }}>
+              No active proposals at the moment. Check back later for new governance proposals.
+            </p>
+          </div>
+          
+          <button style={{
+            background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+            color: 'white',
+            border: 'none',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontWeight: '600'
+          }}>
+            Create New Proposal
+          </button>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>📊 Voting Power</h2>
+          <div style={{ 
+            background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', 
+            color: 'white', 
+            padding: '1.5rem', 
+            borderRadius: '8px',
+            marginBottom: '1.5rem'
+          }}>
+            <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Your Voting Power</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
+              0 BQBTC
+            </div>
+            <div style={{ fontSize: '0.875rem', opacity: 0.9, marginTop: '0.5rem' }}>
+              Stake tokens to participate in governance
+            </div>
+          </div>
+          
+          <button style={{
+            background: 'linear-gradient(135deg, #10b981, #059669)',
+            color: 'white',
+            border: 'none',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontWeight: '600'
+          }}>
+            Stake Tokens
+          </button>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>📈 Recent Activity</h2>
+          <div style={{ 
+            background: '#f8fafc', 
+            padding: '1rem', 
+            borderRadius: '8px', 
+            border: '1px solid #e2e8f0'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.75rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <div>
+                <div style={{ fontWeight: '600', color: '#1a202c' }}>Proposal #001</div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Increase protocol fees</div>
+              </div>
+              <div style={{ 
+                background: '#10b981', 
+                color: 'white', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '600'
+              }}>
+                Passed
               </div>
             </div>
-            <div style={{ padding: '2rem', textAlign: 'center', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', margin: '1rem 0' }}>
-              <h3>🗳️ Proposal #002</h3>
-              <p>Update governance parameters</p>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1rem' }}>
-                <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>👍 Vote Yes</button>
-                <button className="btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>👎 Vote No</button>
+            
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.75rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <div>
+                <div style={{ fontWeight: '600', color: '#1a202c' }}>Proposal #002</div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Add new token pair</div>
+              </div>
+              <div style={{ 
+                background: '#ef4444', 
+                color: 'white', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '600'
+              }}>
+                Rejected
+              </div>
+            </div>
+            
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.75rem 0'
+            }}>
+              <div>
+                <div style={{ fontWeight: '600', color: '#1a202c' }}>Proposal #003</div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Update governance parameters</div>
+              </div>
+              <div style={{ 
+                background: '#f59e0b', 
+                color: 'white', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '600'
+              }}>
+                Pending
               </div>
             </div>
           </div>
         </div>
 
         <div className="dashboard-card">
-          <h2>📝 Create Proposal</h2>
-          <div className="input-group">
-            <input type="text" placeholder="Proposal Title" />
-            <textarea placeholder="Proposal Description" rows={4} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '1rem', color: 'white', resize: 'vertical' }}></textarea>
-            <button className="btn-primary">🚀 Submit Proposal</button>
-          </div>
-        </div>
-
-        <div className="dashboard-card">
-          <h2>👥 Voting Power</h2>
-          <div className="balance-display">
-            Your Voting Power: <strong>1,250 BQBTC</strong>
-          </div>
-          <p style={{ marginTop: '1rem', opacity: '0.7' }}>
-            Voting power is based on your BQBTC token holdings. The more tokens you hold, the more influence you have in governance decisions.
-          </p>
-        </div>
-
-        <div className="dashboard-card">
-          <h2>📈 Governance Stats</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-            <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-              <h3 style={{ color: '#667eea' }}>15</h3>
-              <p>Active Proposals</p>
+          <h2>⚙️ Protocol Parameters</h2>
+          <div style={{ 
+            background: '#f8fafc', 
+            padding: '1rem', 
+            borderRadius: '8px', 
+            border: '1px solid #e2e8f0'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.5rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <span style={{ color: '#4a5568' }}>Minimum Proposal Threshold</span>
+              <span style={{ fontWeight: '600', color: '#1a202c' }}>1,000 BQBTC</span>
             </div>
-            <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-              <h3 style={{ color: '#764ba2' }}>892K</h3>
-              <p>Total Votes Cast</p>
+            
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.5rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <span style={{ color: '#4a5568' }}>Voting Period</span>
+              <span style={{ fontWeight: '600', color: '#1a202c' }}>7 days</span>
             </div>
-            <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-              <h3 style={{ color: '#f093fb' }}>67%</h3>
-              <p>Participation Rate</p>
+            
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.5rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <span style={{ color: '#4a5568' }}>Quorum Required</span>
+              <span style={{ fontWeight: '600', color: '#1a202c' }}>10%</span>
             </div>
-            <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-              <h3 style={{ color: '#ffa726' }}>48</h3>
-              <p>Passed Proposals</p>
+            
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.5rem 0'
+            }}>
+              <span style={{ color: '#4a5568' }}>Execution Delay</span>
+              <span style={{ fontWeight: '600', color: '#1a202c' }}>24 hours</span>
             </div>
           </div>
         </div>
       </div>
-
-      <div style={{ marginTop: '3rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/dashboard" className="btn-secondary">🪙 Token Dashboard</Link>
-          <Link to="/cover" className="btn-secondary">🛡️ Insurance Cover</Link>
-          <Link to="/pool" className="btn-secondary">💧 Liquidity Pools</Link>
-        </div>
-      </div>
-    </div>
+    </DashboardLayout>
   );
 };
 

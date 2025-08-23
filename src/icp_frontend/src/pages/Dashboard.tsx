@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Principal } from '@dfinity/principal';
 import { getBQBTCActor } from '../utils/actor';
+import DashboardLayout from '../components/DashboardLayout';
 
 interface TokenMetadata {
   decimals: number;
@@ -167,149 +168,262 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="dashboard-page">
-      <div className="dashboard-header">
-        <h1>Dashboard</h1>
-        <p>Interact with your deployed contracts</p>
+    <DashboardLayout title="Dashboard" subtitle="Manage your BQBTC tokens and DeFi portfolio">
+      {/* Overview Cards */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+        gap: '1.5rem', 
+        marginBottom: '2rem' 
+      }}>
+        <div style={{ 
+          background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', 
+          color: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '12px',
+          boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.3)'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Total Balance</div>
+          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
+            {bqbtcBalance} BQBTC
+          </div>
+        </div>
+        
+        <div style={{ 
+          background: 'linear-gradient(135deg, #10b981, #059669)', 
+          color: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '12px',
+          boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.3)'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Total Supply</div>
+          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
+            {tokenInfo?.total_supply.toString() || '0'} BQBTC
+          </div>
+        </div>
+        
+        <div style={{ 
+          background: 'linear-gradient(135deg, #f59e0b, #d97706)', 
+          color: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '12px',
+          boxShadow: '0 4px 6px -1px rgba(245, 158, 11, 0.3)'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Token Symbol</div>
+          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
+            {tokenInfo?.symbol || 'BQBTC'}
+          </div>
+        </div>
+        
+        <div style={{ 
+          background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', 
+          color: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '12px',
+          boxShadow: '0 4px 6px -1px rgba(139, 92, 246, 0.3)'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Decimals</div>
+          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
+            {tokenInfo?.decimals || 8}
+          </div>
+        </div>
       </div>
 
       <div className="dashboard-grid">
         {/* BQBTC Token Contract */}
         <div className="dashboard-card">
-          <h2>BQBTC Token</h2>
+          <h2>🪙 Token Management</h2>
 
           {tokenInfo && (
-            <div style={{ marginBottom: '20px' }}>
-              <p><strong>Name:</strong> {tokenInfo.name}</p>
-              <p><strong>Symbol:</strong> {tokenInfo.symbol}</p>
-              <p><strong>Decimals:</strong> {tokenInfo.decimals}</p>
-              <p><strong>Total Supply:</strong> {tokenInfo.total_supply.toString()}</p>
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '1rem', 
+              borderRadius: '8px', 
+              marginBottom: '1.5rem',
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.875rem' }}>
+                <div><strong>Name:</strong> {tokenInfo.name}</div>
+                <div><strong>Symbol:</strong> {tokenInfo.symbol}</div>
+                <div><strong>Decimals:</strong> {tokenInfo.decimals}</div>
+                <div><strong>Total Supply:</strong> {tokenInfo.total_supply.toString()}</div>
+              </div>
             </div>
           )}
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <h3>Check Balance</h3>
-            <input
-              type="text"
-              placeholder="Principal ID"
-              value={principalId}
-              onChange={(e) => setPrincipalId(e.target.value)}
-              style={{ marginRight: '10px', padding: '5px', width: '220px' }}
-            />
-            <button onClick={fetchBalance} disabled={loading || !principalId || !isValidPrincipal()}>
-              {loading ? 'Loading...' : 'Check Balance'}
-            </button>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <input
+                type="text"
+                placeholder="Principal ID"
+                value={principalId}
+                onChange={(e) => setPrincipalId(e.target.value)}
+                style={{ flex: 1 }}
+              />
+              <button onClick={fetchBalance} disabled={loading || !principalId || !isValidPrincipal()}>
+                {loading ? 'Loading...' : 'Check'}
+              </button>
+            </div>
             {!isValidPrincipal() && principalId && (
-              <p style={{ color: 'red', fontSize: '12px' }}>Invalid Principal ID</p>
+              <p style={{ color: '#ef4444', fontSize: '0.75rem' }}>Invalid Principal ID</p>
             )}
-            <div style={{ marginTop: '10px' }}>
+            <div style={{ 
+              background: '#f0f9ff', 
+              padding: '0.75rem', 
+              borderRadius: '8px', 
+              border: '1px solid #bae6fd',
+              marginTop: '0.5rem'
+            }}>
               <strong>Balance:</strong> {bqbtcBalance} BQBTC
             </div>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <h4>Mint Tokens</h4>
-            <input
-              type="number"
-              placeholder="Amount to mint"
-              value={mintAmount}
-              onChange={(e) => setMintAmount(e.target.value)}
-              style={{ marginRight: '10px', padding: '5px' }}
-            />
-            <button onClick={handleMint} disabled={loading || !mintAmount}>
-              Mint
-            </button>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <input
+                type="number"
+                placeholder="Amount to mint"
+                value={mintAmount}
+                onChange={(e) => setMintAmount(e.target.value)}
+                style={{ flex: 1 }}
+              />
+              <button onClick={handleMint} disabled={loading || !mintAmount}>
+                Mint
+              </button>
+            </div>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <h4>Burn Tokens</h4>
-            <input
-              type="number"
-              placeholder="Amount to burn"
-              value={burnAmount}
-              onChange={(e) => setBurnAmount(e.target.value)}
-              style={{ marginRight: '10px', padding: '5px' }}
-            />
-            <button onClick={handleBurn} disabled={loading || !burnAmount}>
-              Burn
-            </button>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <input
+                type="number"
+                placeholder="Amount to burn"
+                value={burnAmount}
+                onChange={(e) => setBurnAmount(e.target.value)}
+                style={{ flex: 1 }}
+              />
+              <button onClick={handleBurn} disabled={loading || !burnAmount}>
+                Burn
+              </button>
+            </div>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <h4>Transfer Tokens</h4>
-            <input
-              type="text"
-              placeholder="Recipient Principal"
-              value={transferTo}
-              onChange={(e) => setTransferTo(e.target.value)}
-              style={{ marginRight: '10px', padding: '5px', width: '200px' }}
-            />
-            <input
-              type="number"
-              placeholder="Amount"
-              value={transferAmount}
-              onChange={(e) => setTransferAmount(e.target.value)}
-              style={{ marginRight: '10px', padding: '5px' }}
-            />
-            <button
-              onClick={handleTransfer}
-              disabled={loading || !transferTo || !transferAmount}
-            >
-              Transfer
-            </button>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <input
+                type="text"
+                placeholder="Recipient Principal"
+                value={transferTo}
+                onChange={(e) => setTransferTo(e.target.value)}
+                style={{ flex: 1 }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <input
+                type="number"
+                placeholder="Amount"
+                value={transferAmount}
+                onChange={(e) => setTransferAmount(e.target.value)}
+                style={{ flex: 1 }}
+              />
+              <button
+                onClick={handleTransfer}
+                disabled={loading || !transferTo || !transferAmount}
+              >
+                Transfer
+              </button>
+            </div>
             {transferTo && (() => {
               try {
                 Principal.fromText(transferTo);
                 return null;
               } catch {
-                return <p style={{ color: 'red', fontSize: '12px' }}>Invalid Recipient Principal</p>;
+                return <p style={{ color: '#ef4444', fontSize: '0.75rem' }}>Invalid Recipient Principal</p>;
               }
             })()}
           </div>
         </div>
 
-        {/* Governance Contract */}
+        {/* Quick Actions */}
         <div className="dashboard-card">
-          <h2>Governance</h2>
-          <p>Governance contract is deployed and ready for interaction.</p>
-          <button onClick={() => window.location.href = '/governance'}>
-            Go to Governance
-          </button>
-        </div>
-
-        {/* Cover Contract */}
-        <div className="dashboard-card">
-          <h2>Cover Protocol</h2>
-          <p>Cover contract is deployed and ready for interaction.</p>
-          <button onClick={() => window.location.href = '/cover'}>
-            Go to Cover
-          </button>
-        </div>
-
-        {/* Pool Contract */}
-        <div className="dashboard-card">
-          <h2>Liquidity Pool</h2>
-          <p>Pool contract is deployed and ready for interaction.</p>
-          <button onClick={() => window.location.href = '/pool'}>
-            Go to Pool
-          </button>
+          <h2>⚡ Quick Actions</h2>
+          <div style={{ display: 'grid', gap: '1rem' }}>
+            <button 
+              onClick={() => window.location.href = '/governance'}
+              style={{
+                background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+                color: 'white',
+                border: 'none',
+                padding: '1rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                textAlign: 'left'
+              }}
+            >
+              <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🏛️</div>
+              <div style={{ fontWeight: '600' }}>Governance</div>
+                             <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Vote on proposals and manage protocol</div>
+            </button>
+            
+            <button 
+              onClick={() => window.location.href = '/cover'}
+              style={{
+                background: 'linear-gradient(135deg, #10b981, #059669)',
+                color: 'white',
+                border: 'none',
+                padding: '1rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                textAlign: 'left'
+              }}
+            >
+              <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🛡️</div>
+              <div style={{ fontWeight: '600' }}>Insurance Cover</div>
+                             <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Protect your investments</div>
+            </button>
+            
+            <button 
+              onClick={() => window.location.href = '/pool'}
+              style={{
+                background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                color: 'white',
+                border: 'none',
+                padding: '1rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                textAlign: 'left'
+              }}
+            >
+              <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>💧</div>
+              <div style={{ fontWeight: '600' }}>Liquidity Pool</div>
+                             <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Provide liquidity and earn rewards</div>
+            </button>
+          </div>
         </div>
       </div>
 
       {error && (
         <div
           style={{
-            color: 'red',
-            marginTop: '20px',
-            padding: '10px',
-            background: 'rgba(255,0,0,0.1)',
-            borderRadius: '5px',
+            color: '#ef4444',
+            marginTop: '1rem',
+            padding: '1rem',
+            background: '#fef2f2',
+            borderRadius: '8px',
+            border: '1px solid #fecaca'
           }}
         >
           {error}
         </div>
       )}
-    </div>
+    </DashboardLayout>
   );
 };
 

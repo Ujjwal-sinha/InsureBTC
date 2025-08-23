@@ -1,122 +1,265 @@
 
-import { Link } from 'react-router-dom';
+import React from 'react';
+import DashboardLayout from '../components/DashboardLayout';
 
-const Cover = () => {
+const Cover: React.FC = () => {
   return (
-    <div className="dashboard-page">
-      <Link to="/" className="back-btn">← Back to Home</Link>
-      
-      <div className="dashboard-header">
-        <h1>🛡️ Insurance Cover</h1>
-        <p>Protect your DeFi investments with comprehensive insurance coverage</p>
-      </div>
-
+    <DashboardLayout title="Insurance Cover" subtitle="Protect your investments with comprehensive coverage">
       <div className="dashboard-grid">
         <div className="dashboard-card">
-          <h2>📋 Available Coverage</h2>
-          <div style={{ display: 'grid', gap: '1rem', marginTop: '1rem' }}>
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
-              <h3>Smart Contract Risk Coverage</h3>
-              <p style={{ opacity: '0.8', margin: '0.5rem 0' }}>Protection against smart contract vulnerabilities and exploits</p>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
-                <span>Premium: <strong>0.5% APY</strong></span>
-                <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Purchase</button>
+          <h2>🛡️ Active Coverage</h2>
+          <div style={{ 
+            background: '#f8fafc', 
+            padding: '1.5rem', 
+            borderRadius: '8px', 
+            border: '1px solid #e2e8f0',
+            marginBottom: '1.5rem'
+          }}>
+            <p style={{ color: '#6b7280', fontStyle: 'italic' }}>
+              No active coverage found. Purchase coverage to protect your investments.
+            </p>
+          </div>
+          
+          <button style={{
+            background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+            color: 'white',
+            border: 'none',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontWeight: '600'
+          }}>
+            Purchase Coverage
+          </button>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>💰 Coverage Pool</h2>
+          <div style={{ 
+            background: 'linear-gradient(135deg, #10b981, #059669)', 
+            color: 'white', 
+            padding: '1.5rem', 
+            borderRadius: '8px',
+            marginBottom: '1.5rem'
+          }}>
+            <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Total Pool Value</div>
+            <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
+              $2.5M
+            </div>
+            <div style={{ fontSize: '0.875rem', opacity: 0.9, marginTop: '0.5rem' }}>
+              Available for claims
+            </div>
+          </div>
+          
+          <div style={{ 
+            background: '#f0f9ff', 
+            padding: '1rem', 
+            borderRadius: '8px',
+            border: '1px solid #bae6fd'
+          }}>
+            <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#0369a1' }}>
+              Pool Statistics
+            </div>
+            <div style={{ fontSize: '0.75rem', color: '#0c4a6e', marginTop: '0.5rem' }}>
+              Active Policies: 1,247<br />
+              Claims Paid: $450K<br />
+              Success Rate: 98.5%
+            </div>
+          </div>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>📋 Available Plans</h2>
+          <div style={{ display: 'grid', gap: '1rem' }}>
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '1rem', 
+              borderRadius: '8px', 
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <h4 style={{ color: '#1a202c', margin: 0 }}>Basic Coverage</h4>
+                <span style={{ 
+                  background: '#10b981', 
+                  color: 'white', 
+                  padding: '0.25rem 0.75rem', 
+                  borderRadius: '12px',
+                  fontSize: '0.75rem',
+                  fontWeight: '600'
+                }}>
+                  $50/month
+                </span>
+              </div>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>
+                Covers smart contract vulnerabilities and basic risks
+              </p>
+              <button style={{
+                background: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: '600'
+              }}>
+                Select Plan
+              </button>
+            </div>
+            
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '1rem', 
+              borderRadius: '8px', 
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <h4 style={{ color: '#1a202c', margin: 0 }}>Premium Coverage</h4>
+                <span style={{ 
+                  background: '#f59e0b', 
+                  color: 'white', 
+                  padding: '0.25rem 0.75rem', 
+                  borderRadius: '12px',
+                  fontSize: '0.75rem',
+                  fontWeight: '600'
+                }}>
+                  $150/month
+                </span>
+              </div>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>
+                Comprehensive coverage including market risks and advanced protection
+              </p>
+              <button style={{
+                background: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: '600'
+              }}>
+                Select Plan
+              </button>
+            </div>
+            
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '1rem', 
+              borderRadius: '8px', 
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <h4 style={{ color: '#1a202c', margin: 0 }}>Enterprise Coverage</h4>
+                <span style={{ 
+                  background: '#8b5cf6', 
+                  color: 'white', 
+                  padding: '0.25rem 0.75rem', 
+                  borderRadius: '12px',
+                  fontSize: '0.75rem',
+                  fontWeight: '600'
+                }}>
+                  Custom
+                </span>
+              </div>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>
+                Tailored coverage for large institutions and high-value portfolios
+              </p>
+              <button style={{
+                background: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: '600'
+              }}>
+                Contact Sales
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="dashboard-card">
+          <h2>📊 Claims History</h2>
+          <div style={{ 
+            background: '#f8fafc', 
+            padding: '1rem', 
+            borderRadius: '8px', 
+            border: '1px solid #e2e8f0'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.75rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <div>
+                <div style={{ fontWeight: '600', color: '#1a202c' }}>Claim #001</div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Smart contract exploit</div>
+              </div>
+              <div style={{ 
+                background: '#10b981', 
+                color: 'white', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '600'
+              }}>
+                Paid
               </div>
             </div>
             
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', border: '1px solid rgba(118, 75, 162, 0.3)' }}>
-              <h3>Liquidity Pool Protection</h3>
-              <p style={{ opacity: '0.8', margin: '0.5rem 0' }}>Coverage against impermanent loss and pool exploits</p>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
-                <span>Premium: <strong>0.8% APY</strong></span>
-                <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Purchase</button>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.75rem 0',
+              borderBottom: '1px solid #e5e7eb'
+            }}>
+              <div>
+                <div style={{ fontWeight: '600', color: '#1a202c' }}>Claim #002</div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Market volatility loss</div>
+              </div>
+              <div style={{ 
+                background: '#f59e0b', 
+                color: 'white', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '600'
+              }}>
+                Pending
               </div>
             </div>
             
-            <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', border: '1px solid rgba(240, 147, 251, 0.3)' }}>
-              <h3>Protocol Risk Coverage</h3>
-              <p style={{ opacity: '0.8', margin: '0.5rem 0' }}>Comprehensive protocol-level risk protection</p>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
-                <span>Premium: <strong>1.2% APY</strong></span>
-                <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Purchase</button>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '0.75rem 0'
+            }}>
+              <div>
+                <div style={{ fontWeight: '600', color: '#1a202c' }}>Claim #003</div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Liquidation event</div>
+              </div>
+              <div style={{ 
+                background: '#ef4444', 
+                color: 'white', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '600'
+              }}>
+                Rejected
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="dashboard-card">
-          <h2>📊 My Coverage</h2>
-          <div style={{ textAlign: 'center', padding: '2rem' }}>
-            <div className="balance-display" style={{ marginBottom: '1rem' }}>
-              Total Coverage: <strong>$25,000</strong>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-              <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-                <h4>Active Policies</h4>
-                <strong style={{ color: '#667eea', fontSize: '1.5rem' }}>3</strong>
-              </div>
-              <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-                <h4>Monthly Premium</h4>
-                <strong style={{ color: '#764ba2', fontSize: '1.5rem' }}>$18.50</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="dashboard-card">
-          <h2>🔄 Claims History</h2>
-          <div style={{ marginTop: '1rem' }}>
-            <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', marginBottom: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h4>Claim #CL001</h4>
-                  <p style={{ opacity: '0.7', fontSize: '0.9rem' }}>Smart Contract Coverage</p>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <span style={{ color: '#4caf50', fontWeight: 'bold' }}>✅ Approved</span>
-                  <p style={{ opacity: '0.7', fontSize: '0.9rem' }}>$2,500</p>
-                </div>
-              </div>
-            </div>
-            <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h4>Claim #CL002</h4>
-                  <p style={{ opacity: '0.7', fontSize: '0.9rem' }}>Pool Protection</p>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <span style={{ color: '#ff9800', fontWeight: 'bold' }}>⏳ Pending</span>
-                  <p style={{ opacity: '0.7', fontSize: '0.9rem' }}>$1,200</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="dashboard-card">
-          <h2>📄 File New Claim</h2>
-          <div className="input-group">
-            <select style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '1rem', color: 'white' }}>
-              <option>Select Coverage Type</option>
-              <option>Smart Contract Risk</option>
-              <option>Liquidity Pool Protection</option>
-              <option>Protocol Risk</option>
-            </select>
-            <input type="number" placeholder="Claim Amount (USD)" />
-            <textarea placeholder="Incident Description" rows={3} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '1rem', color: 'white', resize: 'vertical' }}></textarea>
-            <button className="btn-primary">📤 Submit Claim</button>
           </div>
         </div>
       </div>
-
-      <div style={{ marginTop: '3rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/dashboard" className="btn-secondary">🪙 Token Dashboard</Link>
-          <Link to="/governance" className="btn-secondary">🏛️ Governance</Link>
-          <Link to="/pool" className="btn-secondary">💧 Liquidity Pools</Link>
-        </div>
-      </div>
-    </div>
+    </DashboardLayout>
   );
 };
 
