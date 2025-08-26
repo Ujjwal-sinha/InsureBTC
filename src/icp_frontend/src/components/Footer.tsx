@@ -9,8 +9,7 @@ const Footer: React.FC = () => {
         <div className="footer-main">
           <div className="footer-brand">
             <div className="footer-logo">
-              <span className="logo-icon">⚡</span>
-              <span className="logo-text">InsureBTC</span>
+              <img src="/logo.png" alt="InsureBTC" className="footer-logo-image" />
               <span className="logo-badge">PROTOCOL</span>
             </div>
             <p className="footer-description">

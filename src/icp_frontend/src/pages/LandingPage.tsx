@@ -2,13 +2,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as THREE from 'three';
-import HeroStats from '../components/HeroStats';
 import CTASection from '../components/CTASection';
 import Footer from '../components/Footer';
 
 const LandingPage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -16,13 +15,13 @@ const LandingPage: React.FC = () => {
     // Three.js setup - Web3 aesthetic
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-      canvas: canvasRef.current, 
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current,
       alpha: true,
       antialias: true,
       powerPreference: "high-performance"
     });
-    
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
@@ -37,7 +36,7 @@ const LandingPage: React.FC = () => {
       posArray[i] = (Math.random() - 0.5) * 400;
       posArray[i + 1] = (Math.random() - 0.5) * 400;
       posArray[i + 2] = (Math.random() - 0.5) * 400;
-      
+
       // Crypto-inspired colors (blue, purple, cyan)
       const colors = [0x3b82f6, 0x8b5cf6, 0x06b6d4, 0x10b981];
       const color = colors[Math.floor(Math.random() * colors.length)];
@@ -66,38 +65,38 @@ const LandingPage: React.FC = () => {
       const networkGeometry = new THREE.BufferGeometry();
       const networkPositions = [];
       const networkColors = [];
-      
+
       // Create network nodes
       for (let i = 0; i < 20; i++) {
         const x = (Math.random() - 0.5) * 200;
         const y = (Math.random() - 0.5) * 200;
         const z = (Math.random() - 0.5) * 200;
-        
+
         networkPositions.push(x, y, z);
         networkColors.push(0.2, 0.6, 1.0); // Blue nodes
       }
-      
+
       // Create connections between nodes
       for (let i = 0; i < 15; i++) {
         const node1 = Math.floor(Math.random() * 20) * 3;
         const node2 = Math.floor(Math.random() * 20) * 3;
-        
+
         networkPositions.push(
           networkPositions[node1], networkPositions[node1 + 1], networkPositions[node1 + 2],
           networkPositions[node2], networkPositions[node2 + 1], networkPositions[node2 + 2]
         );
         networkColors.push(0.1, 0.4, 0.8, 0.1, 0.4, 0.8); // Connection lines
       }
-      
+
       networkGeometry.setAttribute('position', new THREE.Float32BufferAttribute(networkPositions, 3));
       networkGeometry.setAttribute('color', new THREE.Float32BufferAttribute(networkColors, 3));
-      
+
       const networkMaterial = new THREE.LineBasicMaterial({
         vertexColors: true,
-      transparent: true,
-      opacity: 0.3,
-    });
-      
+        transparent: true,
+        opacity: 0.3,
+      });
+
       return new THREE.LineSegments(networkGeometry, networkMaterial);
     };
 
@@ -115,7 +114,7 @@ const LandingPage: React.FC = () => {
       // Rotate particles with blockchain effect
       particlesMesh.rotation.y += 0.001;
       particlesMesh.rotation.x += 0.0005;
-      
+
       // Animate network
       network.rotation.y += 0.002;
       network.rotation.x += 0.001;
@@ -136,7 +135,6 @@ const LandingPage: React.FC = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    setIsLoaded(true);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -147,14 +145,13 @@ const LandingPage: React.FC = () => {
     <div className="landing-page">
       {/* Web3 Three.js Canvas Background */}
       <canvas ref={canvasRef} className="three-canvas" />
-      
+
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo">
-            <span className="logo-icon">⚡</span>
-            <span className="logo-text">InsureBTC</span>
-            <span className="logo-badge">PROTOCOL</span>
+            <img src="/logo.png" alt="InsureBTC" className="logo-image" />
+            <span className="logo-badge"> INSUREBTC PROTOCOL</span>
           </div>
           <ul className="nav-links">
             <li><a href="#features">Features</a></li>
@@ -176,17 +173,18 @@ const LandingPage: React.FC = () => {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-badge">
-              <span className="badge-icon">🌐</span>
-              <span>BUILT ON INTERNET COMPUTER</span>
+              <span className="badge-icon">🛡️</span>
+              <span>INSUREBTC PROTOCOL</span>
             </div>
             <h1>
-              <span className="gradient-text">NEXT-GEN</span>
-              <br />
-              <span className="gradient-text">DEFI PROTOCOL</span>
+              <span className="gradient-text">InsureBTC</span>
             </h1>
+            <p className="hero-subtitle">
+              Next-Generation DeFi Protocol
+            </p>
             <p className="hero-description">
-              Experience the future of decentralized finance with InsureBTC - lightning-fast transactions, 
-              enterprise security, and true decentralization.
+              Revolutionary decentralized finance platform built on Internet Computer.
+              Secure insurance coverage, lightning-fast transactions, and comprehensive DeFi solutions.
             </p>
             <div className="cta-buttons">
               <Link to="/dashboard" className="btn-primary">
@@ -201,7 +199,7 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Web3 Floating Elements */}
         <div className="floating-elements">
           <div className="floating-card blockchain-card" style={{ animationDelay: '0s' }}>
@@ -251,13 +249,13 @@ const LandingPage: React.FC = () => {
               Discover how ICP revolutionizes DeFi with unmatched performance, security, and decentralization
             </p>
           </div>
-          
+
           <div className="icp-grid">
             <div className="icp-card blockchain-card">
               <div className="icp-icon">⚡</div>
               <h3>Web Speed Performance</h3>
               <p>
-                Sub-second finality with unlimited scalability. Process thousands of transactions 
+                Sub-second finality with unlimited scalability. Process thousands of transactions
                 per second with instant confirmation, just like traditional web applications.
               </p>
               <div className="icp-metric">
@@ -266,12 +264,12 @@ const LandingPage: React.FC = () => {
               </div>
               <div className="card-glow"></div>
             </div>
-            
+
             <div className="icp-card blockchain-card">
               <div className="icp-icon">🔒</div>
               <h3>Enterprise Security</h3>
               <p>
-                Advanced cryptography and consensus mechanisms ensure your assets are protected 
+                Advanced cryptography and consensus mechanisms ensure your assets are protected
                 with military-grade security. No private keys to manage or lose.
               </p>
               <div className="icp-metric">
@@ -280,12 +278,12 @@ const LandingPage: React.FC = () => {
               </div>
               <div className="card-glow"></div>
             </div>
-            
+
             <div className="icp-card blockchain-card">
               <div className="icp-icon">🌐</div>
               <h3>True Decentralization</h3>
               <p>
-                No single point of failure. Distributed across hundreds of independent data centers 
+                No single point of failure. Distributed across hundreds of independent data centers
                 worldwide, ensuring censorship resistance and global accessibility.
               </p>
               <div className="icp-metric">
@@ -294,12 +292,12 @@ const LandingPage: React.FC = () => {
               </div>
               <div className="card-glow"></div>
             </div>
-            
+
             <div className="icp-card blockchain-card">
               <div className="icp-icon">💡</div>
               <h3>Smart Contract Innovation</h3>
               <p>
-                Canister smart contracts with automatic scaling, persistent memory, 
+                Canister smart contracts with automatic scaling, persistent memory,
                 and seamless integration with traditional web technologies.
               </p>
               <div className="icp-metric">
@@ -327,13 +325,13 @@ const LandingPage: React.FC = () => {
               Everything you need for modern decentralized finance in one platform
             </p>
           </div>
-          
+
           <div className="features-grid">
             <div className="feature-card blockchain-card">
               <div className="feature-icon">🪙</div>
               <h3>Token Management</h3>
               <p>
-                Mint, burn, and transfer InsureBTC tokens with ease. Full control over your digital assets 
+                Mint, burn, and transfer InsureBTC tokens with ease. Full control over your digital assets
                 with enterprise-grade security on the Internet Computer.
               </p>
               <div className="feature-actions">
@@ -348,7 +346,7 @@ const LandingPage: React.FC = () => {
               <div className="feature-icon">🏛️</div>
               <h3>Decentralized Governance</h3>
               <p>
-                Participate in community-driven decisions. Vote on proposals, 
+                Participate in community-driven decisions. Vote on proposals,
                 manage protocol parameters, and shape the future of InsureBTC ecosystem.
               </p>
               <div className="feature-actions">
@@ -363,7 +361,7 @@ const LandingPage: React.FC = () => {
               <div className="feature-icon">🛡️</div>
               <h3>Insurance Coverage</h3>
               <p>
-                Protect your investments with comprehensive coverage options. 
+                Protect your investments with comprehensive coverage options.
                 Smart contract insurance and risk management tools for peace of mind.
               </p>
               <div className="feature-actions">
@@ -378,7 +376,7 @@ const LandingPage: React.FC = () => {
               <div className="feature-icon">💧</div>
               <h3>Liquidity Pools</h3>
               <p>
-                Provide liquidity and earn rewards. Access deep liquidity pools 
+                Provide liquidity and earn rewards. Access deep liquidity pools
                 with competitive yields and automated market-making strategies.
               </p>
               <div className="feature-actions">
@@ -408,7 +406,7 @@ const LandingPage: React.FC = () => {
               Built on the most advanced blockchain technology available
             </p>
           </div>
-          
+
           <div className="tech-grid">
             <div className="tech-item blockchain-card">
               <div className="tech-logo">🌐</div>
@@ -453,13 +451,13 @@ const LandingPage: React.FC = () => {
               Combining the best of traditional finance with blockchain innovation
             </p>
           </div>
-          
+
           <div className="about-content">
             <div className="about-text">
               <p className="about-description">
-                InsureBTC is built on the Internet Computer, providing unprecedented scalability, 
-                security, and decentralization. Our protocol combines the best of traditional 
-                finance with the innovation of blockchain technology to create a truly 
+                InsureBTC is built on the Internet Computer, providing unprecedented scalability,
+                security, and decentralization. Our protocol combines the best of traditional
+                finance with the innovation of blockchain technology to create a truly
                 next-generation DeFi experience.
               </p>
               <div className="about-stats">
@@ -515,26 +513,26 @@ const LandingPage: React.FC = () => {
           <div className="stats-grid">
             <div className="stat-item blockchain-card">
               <div className="stat-icon">💰</div>
-            <h3>$10M+</h3>
-            <p>Total Value Locked</p>
+              <h3>$10M+</h3>
+              <p>Total Value Locked</p>
               <div className="card-glow"></div>
-          </div>
+            </div>
             <div className="stat-item blockchain-card">
               <div className="stat-icon">👥</div>
-            <h3>50K+</h3>
-            <p>Active Users</p>
+              <h3>50K+</h3>
+              <p>Active Users</p>
               <div className="card-glow"></div>
-          </div>
+            </div>
             <div className="stat-item blockchain-card">
               <div className="stat-icon">⚡</div>
-            <h3>99.9%</h3>
-            <p>Uptime</p>
+              <h3>99.9%</h3>
+              <p>Uptime</p>
               <div className="card-glow"></div>
-          </div>
+            </div>
             <div className="stat-item blockchain-card">
               <div className="stat-icon">🌍</div>
-            <h3>24/7</h3>
-            <p>Global Access</p>
+              <h3>24/7</h3>
+              <p>Global Access</p>
               <div className="card-glow"></div>
             </div>
           </div>
