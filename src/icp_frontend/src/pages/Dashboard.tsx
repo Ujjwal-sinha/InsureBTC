@@ -171,62 +171,25 @@ const Dashboard: React.FC = () => {
   return (
     <DashboardLayout title="Dashboard" subtitle="Manage your BQBTC tokens and DeFi portfolio">
       {/* Overview Cards */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-        gap: '1.5rem', 
-        marginBottom: '2rem' 
-      }}>
-        <div style={{ 
-          background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', 
-          color: 'white', 
-          padding: '1.5rem', 
-          borderRadius: '12px',
-          boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.3)'
-        }}>
-          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Total Balance</div>
-          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
-            {bqbtcBalance} BQBTC
-          </div>
+      <div className="overview-cards">
+        <div className="overview-card card-blue">
+          <div className="card-label">Total Balance</div>
+          <div className="card-value">{bqbtcBalance} BQBTC</div>
         </div>
         
-        <div style={{ 
-          background: 'linear-gradient(135deg, #10b981, #059669)', 
-          color: 'white', 
-          padding: '1.5rem', 
-          borderRadius: '12px',
-          boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.3)'
-        }}>
-          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Total Supply</div>
-          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
-            {tokenInfo?.total_supply.toString() || '0'} BQBTC
-          </div>
+        <div className="overview-card card-green">
+          <div className="card-label">Total Supply</div>
+          <div className="card-value">{tokenInfo?.total_supply.toString() || '0'} BQBTC</div>
         </div>
         
-        <div style={{ 
-          background: 'linear-gradient(135deg, #f59e0b, #d97706)', 
-          color: 'white', 
-          padding: '1.5rem', 
-          borderRadius: '12px',
-          boxShadow: '0 4px 6px -1px rgba(245, 158, 11, 0.3)'
-        }}>
-          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Token Symbol</div>
-          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
-            {tokenInfo?.symbol || 'BQBTC'}
-          </div>
+        <div className="overview-card card-orange">
+          <div className="card-label">Token Symbol</div>
+          <div className="card-value">{tokenInfo?.symbol || 'BQBTC'}</div>
         </div>
         
-        <div style={{ 
-          background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', 
-          color: 'white', 
-          padding: '1.5rem', 
-          borderRadius: '12px',
-          boxShadow: '0 4px 6px -1px rgba(139, 92, 246, 0.3)'
-        }}>
-          <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Decimals</div>
-          <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
-            {tokenInfo?.decimals || 8}
-          </div>
+        <div className="overview-card card-purple">
+          <div className="card-label">Decimals</div>
+          <div className="card-value">{tokenInfo?.decimals || 8}</div>
         </div>
       </div>
 
@@ -236,59 +199,43 @@ const Dashboard: React.FC = () => {
           <h2>🪙 Token Management</h2>
 
           {tokenInfo && (
-            <div style={{ 
-              background: '#f8fafc', 
-              padding: '1rem', 
-              borderRadius: '8px', 
-              marginBottom: '1.5rem',
-              border: '1px solid #e2e8f0'
-            }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.875rem' }}>
-                <div><strong>Name:</strong> {tokenInfo.name}</div>
-                <div><strong>Symbol:</strong> {tokenInfo.symbol}</div>
-                <div><strong>Decimals:</strong> {tokenInfo.decimals}</div>
-                <div><strong>Total Supply:</strong> {tokenInfo.total_supply.toString()}</div>
-              </div>
+            <div className="token-info-grid">
+              <div><strong>Name:</strong> {tokenInfo.name}</div>
+              <div><strong>Symbol:</strong> {tokenInfo.symbol}</div>
+              <div><strong>Decimals:</strong> {tokenInfo.decimals}</div>
+              <div><strong>Total Supply:</strong> {tokenInfo.total_supply.toString()}</div>
             </div>
           )}
 
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div className="form-group">
             <h3>Check Balance</h3>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <div className="form-row">
               <input
                 type="text"
                 placeholder="Principal ID"
                 value={principalId}
                 onChange={(e) => setPrincipalId(e.target.value)}
-                style={{ flex: 1 }}
               />
               <button onClick={fetchBalance} disabled={loading || !principalId || !isValidPrincipal()}>
                 {loading ? 'Loading...' : 'Check'}
               </button>
             </div>
             {!isValidPrincipal() && principalId && (
-              <p style={{ color: '#ef4444', fontSize: '0.75rem' }}>Invalid Principal ID</p>
+              <p className="validation-error">Invalid Principal ID</p>
             )}
-            <div style={{ 
-              background: '#f0f9ff', 
-              padding: '0.75rem', 
-              borderRadius: '8px', 
-              border: '1px solid #bae6fd',
-              marginTop: '0.5rem'
-            }}>
+            <div className="info-box">
               <strong>Balance:</strong> {bqbtcBalance} BQBTC
             </div>
           </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div className="form-group">
             <h4>Mint Tokens</h4>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <div className="form-row">
               <input
                 type="number"
                 placeholder="Amount to mint"
                 value={mintAmount}
                 onChange={(e) => setMintAmount(e.target.value)}
-                style={{ flex: 1 }}
               />
               <button onClick={handleMint} disabled={loading || !mintAmount}>
                 Mint
@@ -296,15 +243,14 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div className="form-group">
             <h4>Burn Tokens</h4>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <div className="form-row">
               <input
                 type="number"
                 placeholder="Amount to burn"
                 value={burnAmount}
                 onChange={(e) => setBurnAmount(e.target.value)}
-                style={{ flex: 1 }}
               />
               <button onClick={handleBurn} disabled={loading || !burnAmount}>
                 Burn
@@ -312,24 +258,22 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div className="form-group">
             <h4>Transfer Tokens</h4>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <div className="form-row">
               <input
                 type="text"
                 placeholder="Recipient Principal"
                 value={transferTo}
                 onChange={(e) => setTransferTo(e.target.value)}
-                style={{ flex: 1 }}
               />
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <div className="form-row">
               <input
                 type="number"
                 placeholder="Amount"
                 value={transferAmount}
                 onChange={(e) => setTransferAmount(e.target.value)}
-                style={{ flex: 1 }}
               />
               <button
                 onClick={handleTransfer}
@@ -343,7 +287,7 @@ const Dashboard: React.FC = () => {
                 Principal.fromText(transferTo);
                 return null;
               } catch {
-                return <p style={{ color: '#ef4444', fontSize: '0.75rem' }}>Invalid Recipient Principal</p>;
+                return <p className="validation-error">Invalid Recipient Principal</p>;
               }
             })()}
           </div>
