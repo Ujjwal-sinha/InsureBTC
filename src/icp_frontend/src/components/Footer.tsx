@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div className="footer-brand">
             <div className="footer-logo">
               <img src="/logo.png" alt="InsureBTC" className="footer-logo-image" />
-              <span className="logo-badge">PROTOCOL</span>
+              <span className="logo-badge">INSUREBTC PROTOCOL</span>
             </div>
             <p className="footer-description">
               Building the future of decentralized finance on the Internet Computer. 
