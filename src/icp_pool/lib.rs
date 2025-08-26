@@ -1,9 +1,6 @@
 use candid::{CandidType, Deserialize, Nat, Principal};
 use ic_cdk::api::call::call;
 use ic_cdk_macros::*;
-use ic_ledger_types::{
-    AccountIdentifier, Memo, Subaccount, Tokens, DEFAULT_SUBACCOUNT, MAINNET_LEDGER_CANISTER_ID,
-};
 use std::cell::RefCell;
 use std::collections::HashMap;
 
@@ -16,7 +13,6 @@ use types::{
 use crate::types::TxReceipt;
 
 const ZER0: u64 = 0;
-const ICP_FEE: u64 = 10_000;
 
 thread_local! {
     static STATE: RefCell<State> = RefCell::default();
@@ -145,8 +141,8 @@ async fn deactivate_pool(pool_id: Nat) -> Result<(), String> {
     })
 }
 
-#[query(name = "getPool")]
-fn get_pool(pool_id: Nat) -> Option<Pool> {
+#[update(name = "getPool")]
+async fn get_pool(pool_id: Nat) -> Option<Pool> {
     STATE.with(|state| {
         let state = state.borrow();
         match state.pools.get(&pool_id).cloned() {
@@ -296,7 +292,7 @@ async fn withdraw(pool_id: Nat, amount: Nat) -> Result<(), String> {
         }
     })?;
 
-    match withdraw_icp(&amount_to_mint, caller).await {
+    match withdraw_bqbtc(&amount_to_mint, caller).await {
         Ok(_) => Ok(()),
         Err(WithdrawErr::BalanceLow) => return Err("Insufficient balance".to_string()),
         Err(WithdrawErr::TransferFailure) => return Err("Transfer failed".to_string()),
@@ -323,7 +319,8 @@ async fn deposit(pool_id: Nat, amount: u64) -> Result<(), String> {
         Ok((daily_payout, min_period))
     })?;
 
-    let result = deposit_icp(caller, amount).await;
+    // CHANGE: Use bqBTC instead of ICP
+    let result = deposit_bqbtc(caller, Nat::from(amount)).await;
 
     match result {
         Ok(_) => {
@@ -568,105 +565,73 @@ fn set_cover(cover: Principal) -> Result<(), String> {
     })
 }
 
-async fn deposit_icp(caller: Principal, amount: u64) -> Result<Nat, DepositErr> {
+async fn deposit_bqbtc(caller: Principal, amount: Nat) -> Result<Nat, DepositErr> {
     let canister_id = ic_cdk::api::id();
-    let ledger_canister_id = STATE
-        .with(|s| s.borrow().ledger)
-        .unwrap_or(MAINNET_LEDGER_CANISTER_ID);
+    let bqbtc_canister = STATE.with(|state| {
+        let state = state.borrow();
+        state.bq_btc_address.ok_or(DepositErr::TransferFailure)
+    })?;
 
-    let account = AccountIdentifier::new(&canister_id, &principal_to_subaccount(&caller));
+    // Check caller's bqBTC balance
+    let balance_result: Result<(Nat,), _> = call(bqbtc_canister, "balance_of", (caller,)).await;
+    let caller_balance = balance_result
+        .map_err(|_| DepositErr::TransferFailure)?
+        .0;
 
-    let balance_args = ic_ledger_types::AccountBalanceArgs { account };
-    let balance = ic_ledger_types::account_balance(ledger_canister_id, balance_args)
-        .await
-        .map_err(|_| DepositErr::TransferFailure)?;
-
-    if balance.e8s() < amount + ICP_FEE {
+    if caller_balance < amount {
         return Err(DepositErr::BalanceLow);
     }
 
-    let transfer_args = ic_ledger_types::TransferArgs {
-        memo: Memo(0),
-        amount: balance - Tokens::from_e8s(amount),
-        fee: Tokens::from_e8s(ICP_FEE),
-        from_subaccount: Some(principal_to_subaccount(&caller)),
-        to: AccountIdentifier::new(&canister_id, &DEFAULT_SUBACCOUNT),
-        created_at_time: None,
-    };
-    ic_ledger_types::transfer(ledger_canister_id, transfer_args)
-        .await
-        .map_err(|_| DepositErr::TransferFailure)?
-        .map_err(|_| DepositErr::TransferFailure)?;
-
-    ic_cdk::println!(
-        "Deposit of {} ICP in account {:?}",
-        balance - Tokens::from_e8s(amount + ICP_FEE),
-        &account
-    );
-
-    Ok((balance.e8s() - amount).into())
+    // Transfer bqBTC from caller to this canister
+    let transfer_result: Result<(Result<Nat, types::TxError>,), _> = 
+        call(bqbtc_canister, "transfer", (canister_id, amount.clone())).await;
+    
+    match transfer_result {
+        Ok((Ok(_),)) => {
+            ic_cdk::println!(
+                "Successfully received {} bqBTC from {:?}",
+                amount,
+                caller
+            );
+            Ok(amount)
+        },
+        Ok((Err(_),)) => Err(DepositErr::TransferFailure),
+        Err(_) => Err(DepositErr::TransferFailure),
+    }
 }
 
-pub fn principal_to_subaccount(principal_id: &Principal) -> Subaccount {
-    let mut subaccount = [0; std::mem::size_of::<Subaccount>()];
-    let principal_id = principal_id.as_slice();
-    subaccount[0] = principal_id.len().try_into().unwrap();
-    subaccount[1..1 + principal_id.len()].copy_from_slice(principal_id);
-
-    Subaccount(subaccount)
-}
-
-async fn withdraw_icp(amount: &Nat, user: Principal) -> Result<Nat, WithdrawErr> {
+async fn withdraw_bqbtc(amount: &Nat, user: Principal) -> Result<Nat, WithdrawErr> {
     let canister_id = ic_cdk::api::id();
-    let ledger_canister_id = STATE
-        .with(|s| s.borrow().ledger)
-        .unwrap_or(MAINNET_LEDGER_CANISTER_ID);
+    let bqbtc_canister = STATE.with(|state| {
+        let state = state.borrow();
+        state.bq_btc_address.ok_or(WithdrawErr::BalanceCheckFailed)
+    })?;
 
-    let canister_account = AccountIdentifier::new(&canister_id, &DEFAULT_SUBACCOUNT);
-    let caller_account = AccountIdentifier::new(&user, &principal_to_subaccount(&user));
+    // Check canister's bqBTC balance
+    let balance_result: Result<(Nat,), _> = call(bqbtc_canister, "balance_of", (canister_id,)).await;
+    let canister_balance = balance_result
+        .map_err(|_| WithdrawErr::BalanceCheckFailed)?
+        .0;
 
-    // Fetch the canister's balance
-    let balance_args = ic_ledger_types::AccountBalanceArgs {
-        account: canister_account,
-    };
-    let canister_balance = ic_ledger_types::account_balance(ledger_canister_id, balance_args)
-        .await
-        .map_err(|_| WithdrawErr::BalanceCheckFailed)?;
-
-    let total_amount = amount.to_owned() + ICP_FEE;
-
-    if canister_balance.e8s() < total_amount {
+    if canister_balance < *amount {
         return Err(WithdrawErr::BalanceLow);
     }
 
-    // Create transfer arguments
-    let transfer_args = ic_ledger_types::TransferArgs {
-        memo: Memo(0),
-        amount: Tokens::from_e8s(
-            amount
-                .clone()
-                .0
-                .try_into()
-                .map_err(|_| WithdrawErr::TransferFailure)?,
-        ),
-        fee: Tokens::from_e8s(ICP_FEE),
-        from_subaccount: Some(DEFAULT_SUBACCOUNT),
-        to: caller_account,
-        created_at_time: None,
-    };
-
-    let transfer_result = ic_ledger_types::transfer(ledger_canister_id, transfer_args).await;
+    // Transfer bqBTC from canister to user
+    let transfer_result: Result<(Result<Nat, types::TxError>,), _> = 
+        call(bqbtc_canister, "transfer", (user, amount.clone())).await;
 
     match transfer_result {
-        Ok(Ok(_)) => {
+        Ok((Ok(_),)) => {
             ic_cdk::println!(
-                "Withdrawal of {} ICP to account {:?}",
+                "Withdrawal of {} bqBTC to user {:?}",
                 amount,
-                &caller_account
+                user
             );
-            Ok(total_amount)
-        }
-        _ => Err(WithdrawErr::TransferFailure),
+            Ok(amount.clone())
+        },
+        Ok((Err(_),)) => Err(WithdrawErr::TransferFailure),
+        Err(_) => Err(WithdrawErr::TransferFailure),
     }
 }
 

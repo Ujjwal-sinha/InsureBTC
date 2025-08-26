@@ -42,7 +42,7 @@ service : (principal, principal, principal, principal) -> {
   getLastClaimTime : (principal, nat) -> (Result_5) query;
   getUserCoverInfo : (principal, nat) -> (opt GenericCoverInfo) query;
   getUserParticipation : (principal) -> (Result_5) query;
-  purchaseCover : (nat, nat, nat, nat64) -> (Result);
+  purchaseCover : (nat, nat, nat, nat) -> (Result);
   updateCanisterIds : (principal, principal, principal) -> ();
   updateCover : (nat, text, RiskType, text, text, nat, nat, nat) -> (Result);
   updateMaxAmount : (nat) -> ();

@@ -13,5 +13,4 @@ ic-cdk-macros.workspace = true
 candid.workspace = true
 serde.workspace = true
 icrc-ledger-types = "0.1.8"
-ic-ledger-types = "0.14.0"
 evm-rpc-canister-types.workspace = true

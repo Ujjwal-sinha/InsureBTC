@@ -261,6 +261,7 @@ fn update_canister_ids(lp_contract: Principal, cover_contract: Principal, bqbtc:
         state.lp_contract = Some(lp_contract);
         state.cover_contract = Some(cover_contract);
         state.governance_token = Some(bqbtc);
+        state.bqbtc_contract = Some(bqbtc);
     });
 }
 

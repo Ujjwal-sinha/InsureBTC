@@ -5,6 +5,19 @@ use icrc_ledger_types::icrc1::{account::Account, transfer::NumTokens};
 use serde::Serialize;
 
 #[derive(Clone, CandidType, Deserialize)]
+pub enum TxError {
+    InsufficientAllowance,
+    InsufficientBalance,
+    ErrorOperationStyle,
+    Unauthorized,
+    LedgerTrap,
+    ErrorTo,
+    Other,
+    BlockUsed,
+    AmountTooSmall,
+}
+
+#[derive(Clone, CandidType, Deserialize)]
 pub struct Cover {
     pub id: Nat,
     pub cover_name: String,
