@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, } from 'react';
 import { Link } from 'react-router-dom';
 import * as THREE from 'three';
 import CTASection from '../components/CTASection';
