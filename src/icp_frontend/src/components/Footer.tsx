@@ -17,18 +17,7 @@ const Footer: React.FC = () => {
               Secure, scalable, and user-friendly DeFi solutions for the next generation.
             </p>
             <div className="footer-social">
-              <a href="#" className="social-link" aria-label="Twitter">
-                <span className="social-icon">🐦</span>
-              </a>
-              <a href="#" className="social-link" aria-label="Discord">
-                <span className="social-icon">💬</span>
-              </a>
-              <a href="#" className="social-link" aria-label="Telegram">
-                <span className="social-icon">📱</span>
-              </a>
-              <a href="#" className="social-link" aria-label="GitHub">
-                <span className="social-icon">💻</span>
-              </a>
+             
             </div>
           </div>
           
