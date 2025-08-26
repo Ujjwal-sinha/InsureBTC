@@ -173,7 +173,7 @@ const LandingPage: React.FC = () => {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-badge">
-              <span className="badge-icon">🛡️</span>
+              <span className="badge-icon"></span>
               <span>INSUREBTC PROTOCOL</span>
             </div>
             <h1>
