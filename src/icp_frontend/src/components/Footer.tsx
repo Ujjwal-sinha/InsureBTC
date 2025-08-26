@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div className="footer-brand">
             <div className="footer-logo">
               <span className="logo-icon">⚡</span>
-              <span className="logo-text">BQBTC</span>
+              <span className="logo-text">InsureBTC</span>
               <span className="logo-badge">PROTOCOL</span>
             </div>
             <p className="footer-description">
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <p className="footer-copyright">
-              © 2025 BQBTC Protocol. All rights reserved.
+              © 2025 InsureBTC Protocol. All rights reserved.
             </p>
             <div className="footer-legal">
               <a href="#" className="legal-link">Privacy Policy</a>

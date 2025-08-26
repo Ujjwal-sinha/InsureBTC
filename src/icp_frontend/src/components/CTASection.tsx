@@ -7,7 +7,7 @@ const CTASection: React.FC = () => {
       <div className="cta-container">
         <h2>Ready to Experience the Future of DeFi?</h2>
         <p>
-          Join thousands of users who are already benefiting from BQBTC's advanced 
+          Join thousands of users who are already benefiting from InsureBTC's advanced 
           DeFi platform. Start your journey today with lightning-fast transactions 
           and enterprise-grade security.
         </p>

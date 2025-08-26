@@ -153,7 +153,7 @@ const LandingPage: React.FC = () => {
         <div className="nav-container">
           <div className="logo">
             <span className="logo-icon">⚡</span>
-            <span className="logo-text">BQBTC</span>
+            <span className="logo-text">InsureBTC</span>
             <span className="logo-badge">PROTOCOL</span>
           </div>
           <ul className="nav-links">
@@ -185,7 +185,7 @@ const LandingPage: React.FC = () => {
               <span className="gradient-text">DEFI PROTOCOL</span>
             </h1>
             <p className="hero-description">
-              Experience the future of decentralized finance with BQBTC - lightning-fast transactions, 
+              Experience the future of decentralized finance with InsureBTC - lightning-fast transactions, 
               enterprise security, and true decentralization.
             </p>
             <div className="cta-buttons">
@@ -333,7 +333,7 @@ const LandingPage: React.FC = () => {
               <div className="feature-icon">🪙</div>
               <h3>Token Management</h3>
               <p>
-                Mint, burn, and transfer BQBTC tokens with ease. Full control over your digital assets 
+                Mint, burn, and transfer InsureBTC tokens with ease. Full control over your digital assets 
                 with enterprise-grade security on the Internet Computer.
               </p>
               <div className="feature-actions">
@@ -349,7 +349,7 @@ const LandingPage: React.FC = () => {
               <h3>Decentralized Governance</h3>
               <p>
                 Participate in community-driven decisions. Vote on proposals, 
-                manage protocol parameters, and shape the future of BQBTC ecosystem.
+                manage protocol parameters, and shape the future of InsureBTC ecosystem.
               </p>
               <div className="feature-actions">
                 <Link to="/governance" className="feature-link">
@@ -444,7 +444,7 @@ const LandingPage: React.FC = () => {
           <div className="section-header">
             <div className="section-badge">
               <span className="badge-icon">🎯</span>
-              <span>ABOUT BQBTC</span>
+              <span>ABOUT InsureBTC</span>
             </div>
             <h2 className="section-title">
               <span className="gradient-text">BUILT FOR THE FUTURE</span>
@@ -457,7 +457,7 @@ const LandingPage: React.FC = () => {
           <div className="about-content">
             <div className="about-text">
               <p className="about-description">
-                BQBTC is built on the Internet Computer, providing unprecedented scalability, 
+                InsureBTC is built on the Internet Computer, providing unprecedented scalability, 
                 security, and decentralization. Our protocol combines the best of traditional 
                 finance with the innovation of blockchain technology to create a truly 
                 next-generation DeFi experience.

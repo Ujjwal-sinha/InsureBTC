@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onToggle }) => {
       
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          <div className="sidebar-logo">BQBTC</div>
+          <div className="sidebar-logo">InsureBTC</div>
           <p style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.5rem' }}>
             DeFi Protocol
           </p>

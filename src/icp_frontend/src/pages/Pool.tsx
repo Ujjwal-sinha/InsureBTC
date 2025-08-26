@@ -79,7 +79,7 @@ const Pool: React.FC = () => {
               border: '1px solid #e2e8f0'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <h4 style={{ color: '#1a202c', margin: 0 }}>BQBTC/ICP</h4>
+                <h4 style={{ color: '#1a202c', margin: 0 }}>InsureBTC/ICP</h4>
                 <span style={{ 
                   background: '#10b981', 
                   color: 'white', 
@@ -115,7 +115,7 @@ const Pool: React.FC = () => {
               border: '1px solid #e2e8f0'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <h4 style={{ color: '#1a202c', margin: 0 }}>BQBTC/USDC</h4>
+                <h4 style={{ color: '#1a202c', margin: 0 }}>InsureBTC/USDC</h4>
                 <span style={{ 
                   background: '#f59e0b', 
                   color: 'white', 
@@ -151,7 +151,7 @@ const Pool: React.FC = () => {
               border: '1px solid #e2e8f0'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <h4 style={{ color: '#1a202c', margin: 0 }}>BQBTC/ETH</h4>
+                <h4 style={{ color: '#1a202c', margin: 0 }}>InsureBTC/ETH</h4>
                 <span style={{ 
                   background: '#8b5cf6', 
                   color: 'white', 
@@ -209,7 +209,7 @@ const Pool: React.FC = () => {
                 fontSize: '0.75rem',
                 fontWeight: '600'
               }}>
-                0 BQBTC
+                0 InsureBTC
               </div>
             </div>
             
@@ -232,7 +232,7 @@ const Pool: React.FC = () => {
                 fontSize: '0.75rem',
                 fontWeight: '600'
               }}>
-                0 BQBTC
+                0 InsureBTC
               </div>
             </div>
             

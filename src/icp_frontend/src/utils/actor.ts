@@ -17,7 +17,7 @@ const host = isDevelopment ?
 
 // Get canister IDs from environment or config based on network
 // Load canister IDs from environment variables first, then use defaults
-const BQBTC_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_BQBTC || "uxrrr-q7777-77774-qaaaq-cai";
+const INSURE_BTC_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_BQBTC || "uxrrr-q7777-77774-qaaaq-cai";
 const GOVERNANCE_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_GOVERNANCE || "umunu-kh777-77774-qaaca-cai";
 const COVER_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_COVER || "u6s2n-gx777-77774-qaaba-cai";
 const POOL_CANISTER_ID = import.meta.env.VITE_CANISTER_ID_ICP_POOL || "ulvla-h7777-77774-qaacq-cai";
@@ -49,24 +49,24 @@ async function getAgent() {
   return agent;
 }
 
-export async function getBQBTCActor() {
+export async function getInsureBTCActor() {
   try {
     const agentInstance = await getAgent();
-    console.log('Creating BQBTC actor with canister ID:', BQBTC_CANISTER_ID);
+    console.log('Creating InsureBTC actor with canister ID:', INSURE_BTC_CANISTER_ID);
     const actor = Actor.createActor(bqbtc_idl, {
       agent: agentInstance,
-      canisterId: BQBTC_CANISTER_ID,
+      canisterId: INSURE_BTC_CANISTER_ID,
     });
     
     // Verify actor creation
     if (!actor) {
-      throw new Error('Failed to create BQBTC actor');
+      throw new Error('Failed to create InsureBTC actor');
     }
     
     return actor;
   } catch (error) {
-    console.error('Error creating BQBTC actor:', error);
-    throw new Error(`Failed to initialize BQBTC actor: ${error instanceof Error ? error.message : String(error)}`);
+    console.error('Error creating InsureBTC actor:', error);
+    throw new Error(`Failed to initialize InsureBTC actor: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 

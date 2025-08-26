@@ -45,7 +45,7 @@ const Governance: React.FC = () => {
           }}>
             <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>Your Voting Power</div>
             <div style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.5rem' }}>
-              0 BQBTC
+              0 InsureBTC
             </div>
             <div style={{ fontSize: '0.875rem', opacity: 0.9, marginTop: '0.5rem' }}>
               Stake tokens to participate in governance
@@ -159,7 +159,7 @@ const Governance: React.FC = () => {
               borderBottom: '1px solid #e5e7eb'
             }}>
               <span style={{ color: '#4a5568' }}>Minimum Proposal Threshold</span>
-              <span style={{ fontWeight: '600', color: '#1a202c' }}>1,000 BQBTC</span>
+              <span style={{ fontWeight: '600', color: '#1a202c' }}>1,000 InsureBTC</span>
             </div>
             
             <div style={{ 

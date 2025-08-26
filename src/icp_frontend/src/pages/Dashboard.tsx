@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Principal } from '@dfinity/principal';
-import { getBQBTCActor } from '../utils/actor';
+import { getInsureBTCActor } from '../utils/actor';
 import DashboardLayout from '../components/DashboardLayout';
 import Footer from '../components/Footer';
 
@@ -23,7 +23,7 @@ interface TokenInfo {
 }
 
 const Dashboard: React.FC = () => {
-  const [bqbtcBalance, setBqbtcBalance] = useState<string>('0');
+  const [insureBtcBalance, setInsureBtcBalance] = useState<string>('0');
   const [tokenInfo, setTokenInfo] = useState<TokenInfo | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
     try {
       setLoading(true);
       setError('');
-      const actor = await getBQBTCActor();
+      const actor = await getInsureBTCActor();
 
       // Validate principal ID
       let principal;
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
       if (balance === undefined || balance === null) {
         throw new Error('Balance returned undefined or null');
       }
-      setBqbtcBalance(balance.toString());
+      setInsureBtcBalance(balance.toString());
     } catch (err) {
       console.error('Error fetching balance:', err);
       setError(`Error fetching balance: ${err instanceof Error ? err.message : 'Unknown error'}`);
@@ -84,7 +84,7 @@ const Dashboard: React.FC = () => {
     try {
       setLoading(true);
       setError('');
-      const actor = await getBQBTCActor();
+      const actor = await getInsureBTCActor();
       const principal = Principal.fromText('2vxsx-fae'); // Replace with authenticated principal if needed
       await actor.mint(principal, BigInt(amount));
       await fetchBalance();
@@ -110,7 +110,7 @@ const Dashboard: React.FC = () => {
     try {
       setLoading(true);
       setError('');
-      const actor = await getBQBTCActor();
+      const actor = await getInsureBTCActor();
       await actor.burn(BigInt(amount));
       await fetchBalance();
       setBurnAmount('');
@@ -135,7 +135,7 @@ const Dashboard: React.FC = () => {
     try {
       setLoading(true);
       setError('');
-      const actor = await getBQBTCActor();
+      const actor = await getInsureBTCActor();
       let recipient;
       try {
         recipient = Principal.fromText(transferTo);
@@ -169,22 +169,22 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <DashboardLayout title="Dashboard" subtitle="Manage your BQBTC tokens and DeFi portfolio">
+    <DashboardLayout title="Dashboard" subtitle="Manage your InsureBTC tokens and DeFi portfolio">
       {/* Overview Cards */}
       <div className="overview-cards">
         <div className="overview-card card-blue">
           <div className="card-label">Total Balance</div>
-          <div className="card-value">{bqbtcBalance} BQBTC</div>
+          <div className="card-value">{insureBtcBalance} InsureBTC</div>
         </div>
         
         <div className="overview-card card-green">
           <div className="card-label">Total Supply</div>
-          <div className="card-value">{tokenInfo?.total_supply.toString() || '0'} BQBTC</div>
+          <div className="card-value">{tokenInfo?.total_supply.toString() || '0'} InsureBTC</div>
         </div>
         
         <div className="overview-card card-orange">
           <div className="card-label">Token Symbol</div>
-          <div className="card-value">{tokenInfo?.symbol || 'BQBTC'}</div>
+          <div className="card-value">{tokenInfo?.symbol || 'InsureBTC'}</div>
         </div>
         
         <div className="overview-card card-purple">
@@ -224,7 +224,7 @@ const Dashboard: React.FC = () => {
               <p className="validation-error">Invalid Principal ID</p>
             )}
             <div className="info-box">
-              <strong>Balance:</strong> {bqbtcBalance} BQBTC
+              <strong>Balance:</strong> {insureBtcBalance} InsureBTC
             </div>
           </div>
 
